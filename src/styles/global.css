@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'DM Sans', sans-serif;
+}
+
+body {
+  background: #FAF6EE;
+  overflow: hidden;
+}
+
+button, input, select, textarea {
+  font-family: 'DM Sans', sans-serif;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #F4ECD8; }
+::-webkit-scrollbar-thumb { background: #C9B89A; border-radius: 3px; }
+
+@media print {
+  body { overflow: visible; background: white; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  main { padding: 0 !important; }
+}
