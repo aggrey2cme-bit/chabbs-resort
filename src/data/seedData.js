@@ -288,13 +288,20 @@ export const INITIAL_POOL_ACTIVITIES=[
 ];
 
 export const INITIAL_WATER=[
-  {id:1,date:"2026-03-18",pumpHours:4.5,tankLevel:85,electricityKwh:142,notes:"Normal operations"},
-  {id:2,date:"2026-03-17",pumpHours:5.0,tankLevel:80,electricityKwh:158,notes:"Extra guests – higher usage"},
-  {id:3,date:"2026-03-16",pumpHours:4.0,tankLevel:90,electricityKwh:135,notes:""},
-  {id:4,date:"2026-03-15",pumpHours:4.5,tankLevel:88,electricityKwh:147,notes:""},
-  {id:5,date:"2026-03-14",pumpHours:3.5,tankLevel:92,electricityKwh:128,notes:"Low occupancy"},
-  {id:6,date:"2026-03-13",pumpHours:4.0,tankLevel:89,electricityKwh:139,notes:""},
-  {id:7,date:"2026-03-12",pumpHours:4.5,tankLevel:86,electricityKwh:151,notes:""},
+  {id:1,date:"2026-03-18",pumpHours:4.5,tankLevel:85,electricityKwh:142,solarKwh:38,notes:"Normal operations"},
+  {id:2,date:"2026-03-17",pumpHours:5.0,tankLevel:80,electricityKwh:158,solarKwh:41,notes:"Extra guests – higher usage"},
+  {id:3,date:"2026-03-16",pumpHours:4.0,tankLevel:90,electricityKwh:135,solarKwh:44,notes:""},
+  {id:4,date:"2026-03-15",pumpHours:4.5,tankLevel:88,electricityKwh:147,solarKwh:39,notes:""},
+  {id:5,date:"2026-03-14",pumpHours:3.5,tankLevel:92,electricityKwh:128,solarKwh:46,notes:"Low occupancy"},
+  {id:6,date:"2026-03-13",pumpHours:4.0,tankLevel:89,electricityKwh:139,solarKwh:42,notes:""},
+  {id:7,date:"2026-03-12",pumpHours:4.5,tankLevel:86,electricityKwh:151,solarKwh:37,notes:""},
+  {id:8,date:"2026-03-11",pumpHours:4.0,tankLevel:87,electricityKwh:143,solarKwh:40,notes:""},
+  {id:9,date:"2026-03-10",pumpHours:3.5,tankLevel:91,electricityKwh:130,solarKwh:45,notes:"Low occupancy"},
+  {id:10,date:"2026-03-09",pumpHours:4.5,tankLevel:84,electricityKwh:155,solarKwh:38,notes:""},
+  {id:11,date:"2026-03-08",pumpHours:5.0,tankLevel:79,electricityKwh:162,solarKwh:36,notes:"MSF team — high usage"},
+  {id:12,date:"2026-03-07",pumpHours:4.0,tankLevel:88,electricityKwh:137,solarKwh:43,notes:""},
+  {id:13,date:"2026-03-06",pumpHours:3.5,tankLevel:90,electricityKwh:129,solarKwh:47,notes:"Low occupancy"},
+  {id:14,date:"2026-03-05",pumpHours:4.5,tankLevel:85,electricityKwh:148,solarKwh:40,notes:""},
 ];
 
 export const INITIAL_FINANCIALS=[
@@ -311,6 +318,36 @@ export const INITIAL_MAINTENANCE=[
   {id:3,asset:"Pool Filter",issue:"Routine monthly descale",priority:"Low",parts:"Descaling solution 5L",reported:"2026-03-14",resolved:"2026-03-14",status:"Resolved",assignee:"James Okwany"},
   {id:4,asset:"Showerheads – Villa 1 & 2",issue:"Weekly salty water descale protocol",priority:"Low",parts:"Vinegar solution, wire brush",reported:"2026-03-17",resolved:null,status:"Scheduled",assignee:"Mary Wanjiku"},
   {id:5,asset:"Water Tank Valve",issue:"Slow drip, gasket needed",priority:"Medium",parts:"Rubber gasket x3",reported:"2026-03-16",resolved:"2026-03-17",status:"Resolved",assignee:"Peter Kimani"},
+];
+
+export const INITIAL_ASSETS=[
+  {id:1,name:"AC Unit",category:"HVAC",location:"Villas 1–10 (10 units)",purchaseDate:"2023-01-10",warranty:"2026-01-10",lastService:"2026-03-01",nextService:"2026-04-01",condition:"Good",value:85000,qty:10,notes:"Carrier split units. Salty air accelerates coil corrosion."},
+  {id:2,name:"Borehole Water Pump",category:"Water",location:"Pump House",purchaseDate:"2022-06-15",warranty:"2025-06-15",lastService:"2026-03-16",nextService:"2026-04-16",condition:"Fair",value:180000,qty:1,notes:"Grundfos submersible. Unusual vibration noted — monitor."},
+  {id:3,name:"Standby Water Pump",category:"Water",location:"Pump House",purchaseDate:"2022-06-15",warranty:"2025-06-15",lastService:"2026-02-10",nextService:"2026-05-10",condition:"Good",value:180000,qty:1,notes:"Backup pump. Test monthly."},
+  {id:4,name:"Diesel Generator",category:"Power",location:"Generator Room",purchaseDate:"2021-09-20",warranty:"2024-09-20",lastService:"2026-03-01",nextService:"2026-04-01",condition:"Good",value:950000,qty:1,notes:"Cummins 60kVA. Full load capacity for entire resort."},
+  {id:5,name:"Pool Filter System",category:"Pool",location:"Pool Plant Room",purchaseDate:"2022-04-05",warranty:"2025-04-05",lastService:"2026-03-14",nextService:"2026-04-14",condition:"Good",value:95000,qty:1,notes:"Sand filter + circulation pump. Monthly descale required."},
+  {id:6,name:"Industrial Gas Range",category:"Kitchen",location:"Main Kitchen",purchaseDate:"2022-03-01",warranty:"2025-03-01",lastService:"2026-02-20",nextService:"2026-05-20",condition:"Good",value:120000,qty:1,notes:"6-burner commercial range. Monthly deep clean."},
+  {id:7,name:"Commercial Refrigerator",category:"Kitchen",location:"Main Kitchen",purchaseDate:"2022-03-01",warranty:"2025-03-01",lastService:"2026-03-05",nextService:"2026-06-05",condition:"Good",value:75000,qty:2,notes:"Walk-in cold room + stand-alone fridge."},
+  {id:8,name:"Industrial Washing Machines",category:"Laundry",location:"Laundry Room",purchaseDate:"2023-02-14",warranty:"2026-02-14",lastService:"2026-03-10",nextService:"2026-04-10",condition:"Good",value:95000,qty:2,notes:"Samsung commercial grade. Descale monthly — salty water protocol."},
+  {id:9,name:"Solar PV Panels",category:"Power",location:"Rooftop",purchaseDate:"2023-07-01",warranty:"2033-07-01",lastService:"2026-02-01",nextService:"2026-05-01",condition:"Good",value:850000,qty:24,notes:"24 × 350W panels (8.4 kWp). Quarterly cleaning — dust reduces output 30%."},
+  {id:10,name:"Solar Inverter",category:"Power",location:"Generator Room",purchaseDate:"2023-07-01",warranty:"2028-07-01",lastService:"2026-02-01",nextService:"2026-08-01",condition:"Good",value:120000,qty:1,notes:"Growatt 10kW hybrid inverter with battery backup."},
+  {id:11,name:"Water Storage Tanks",category:"Water",location:"Tank Stand",purchaseDate:"2021-09-20",warranty:"2031-09-20",lastService:"2026-01-15",nextService:"2026-07-15",condition:"Good",value:45000,qty:2,notes:"2 × 10,000L Polytanks. Semi-annual clean required."},
+  {id:12,name:"CCTV System",category:"Security",location:"Reception + All Villas",purchaseDate:"2022-11-01",warranty:"2025-11-01",lastService:"2026-03-01",nextService:"2026-06-01",condition:"Good",value:65000,qty:1,notes:"24-camera DVR system. HDD health check quarterly."},
+];
+
+export const PREVENTIVE_SCHEDULE=[
+  {id:1,task:"Salty Water Descale — Exec Bathtubs",frequency:"Weekly",dayOrDate:"Monday",category:"Water",assignee:"Mary Wanjiku",lastDone:"2026-03-17",nextDue:"2026-03-24",notes:"Use vinegar solution. Focus on taps and shower heads."},
+  {id:2,task:"Salty Water Descale — Showerheads (DL/DR)",frequency:"Weekly",dayOrDate:"Monday",category:"Water",assignee:"Mary Wanjiku",lastDone:"2026-03-17",nextDue:"2026-03-24",notes:"Soak heads in descaling solution overnight if heavily scaled."},
+  {id:3,task:"Pool Chemical Check & Balance",frequency:"Weekly",dayOrDate:"Wednesday",category:"Pool",assignee:"James Okwany",lastDone:"2026-03-18",nextDue:"2026-03-25",notes:"Test pH, chlorine, CYA. Adjust as needed."},
+  {id:4,task:"Generator Test Run (30 minutes)",frequency:"Weekly",dayOrDate:"Friday",category:"Power",assignee:"James Okwany",lastDone:"2026-03-15",nextDue:"2026-03-22",notes:"Run at 50% load minimum. Log fuel level before/after."},
+  {id:5,task:"AC Filter Clean — All Villas",frequency:"Monthly",dayOrDate:"1st Monday",category:"HVAC",assignee:"Peter Kimani",lastDone:"2026-03-03",nextDue:"2026-04-07",notes:"Remove and rinse filters. Salty dust clogs quickly in Turkana."},
+  {id:6,task:"Generator Full Service",frequency:"Monthly",dayOrDate:"1st Wednesday",category:"Power",assignee:"James Okwany",lastDone:"2026-03-05",nextDue:"2026-04-02",notes:"Check oil, coolant, belts, battery. Replace air filter if dusty."},
+  {id:7,task:"Borehole Pump Inspection",frequency:"Monthly",dayOrDate:"2nd Friday",category:"Water",assignee:"James Okwany",lastDone:"2026-03-08",nextDue:"2026-04-12",notes:"Check amperage draw, flow rate, vibration. Log any anomalies."},
+  {id:8,task:"Washing Machine Descale",frequency:"Monthly",dayOrDate:"2nd Monday",category:"Laundry",assignee:"Sarah Lopeyok",lastDone:"2026-03-10",nextDue:"2026-04-14",notes:"Run descale cycle. Salty water accelerates scale buildup."},
+  {id:9,task:"Deep Borehole & Tank Service",frequency:"Quarterly",dayOrDate:"Start of Quarter",category:"Water",assignee:"External Contractor",lastDone:"2026-01-15",nextDue:"2026-04-15",notes:"Professional borehole inspection and tank clean. Book contractor 2 weeks ahead."},
+  {id:10,task:"Solar Panel Cleaning",frequency:"Quarterly",dayOrDate:"Start of Quarter",category:"Power",assignee:"Peter Kimani",lastDone:"2026-02-01",nextDue:"2026-05-01",notes:"Dust reduces solar output by up to 30%. Use soft brush + distilled water."},
+  {id:11,task:"CCTV & Security System Check",frequency:"Quarterly",dayOrDate:"Start of Quarter",category:"Security",assignee:"James Okwany",lastDone:"2026-01-15",nextDue:"2026-04-15",notes:"Check all cameras, DVR storage, motion sensors."},
+  {id:12,task:"Kitchen Deep Clean & Equipment Service",frequency:"Monthly",dayOrDate:"Last Sunday",category:"Kitchen",assignee:"Chef Emmanuel Liru",lastDone:"2026-03-01",nextDue:"2026-04-05",notes:"Degrease range hood, clean behind fridges, descale coffee equipment."},
 ];
 
 export const INITIAL_HOUSEKEEPING=[

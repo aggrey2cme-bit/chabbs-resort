@@ -351,13 +351,20 @@ const INITIAL_POOL_MAINTENANCE=[
 ];
 
 const INITIAL_WATER=[
-  {id:1,date:"2026-03-18",pumpHours:4.5,tankLevel:85,electricityKwh:142,notes:"Normal operations"},
-  {id:2,date:"2026-03-17",pumpHours:5.0,tankLevel:80,electricityKwh:158,notes:"Extra guests – higher usage"},
-  {id:3,date:"2026-03-16",pumpHours:4.0,tankLevel:90,electricityKwh:135,notes:""},
-  {id:4,date:"2026-03-15",pumpHours:4.5,tankLevel:88,electricityKwh:147,notes:""},
-  {id:5,date:"2026-03-14",pumpHours:3.5,tankLevel:92,electricityKwh:128,notes:"Low occupancy"},
-  {id:6,date:"2026-03-13",pumpHours:4.0,tankLevel:89,electricityKwh:139,notes:""},
-  {id:7,date:"2026-03-12",pumpHours:4.5,tankLevel:86,electricityKwh:151,notes:""},
+  {id:1,date:"2026-03-18",pumpHours:4.5,tankLevel:85,electricityKwh:142,solarKwh:38,notes:"Normal operations"},
+  {id:2,date:"2026-03-17",pumpHours:5.0,tankLevel:80,electricityKwh:158,solarKwh:41,notes:"Extra guests – higher usage"},
+  {id:3,date:"2026-03-16",pumpHours:4.0,tankLevel:90,electricityKwh:135,solarKwh:44,notes:""},
+  {id:4,date:"2026-03-15",pumpHours:4.5,tankLevel:88,electricityKwh:147,solarKwh:39,notes:""},
+  {id:5,date:"2026-03-14",pumpHours:3.5,tankLevel:92,electricityKwh:128,solarKwh:46,notes:"Low occupancy"},
+  {id:6,date:"2026-03-13",pumpHours:4.0,tankLevel:89,electricityKwh:139,solarKwh:42,notes:""},
+  {id:7,date:"2026-03-12",pumpHours:4.5,tankLevel:86,electricityKwh:151,solarKwh:37,notes:""},
+  {id:8,date:"2026-03-11",pumpHours:4.0,tankLevel:87,electricityKwh:143,solarKwh:40,notes:""},
+  {id:9,date:"2026-03-10",pumpHours:3.5,tankLevel:91,electricityKwh:130,solarKwh:45,notes:"Low occupancy"},
+  {id:10,date:"2026-03-09",pumpHours:4.5,tankLevel:84,electricityKwh:155,solarKwh:38,notes:""},
+  {id:11,date:"2026-03-08",pumpHours:5.0,tankLevel:79,electricityKwh:162,solarKwh:36,notes:"MSF team – high usage"},
+  {id:12,date:"2026-03-07",pumpHours:4.0,tankLevel:88,electricityKwh:137,solarKwh:43,notes:""},
+  {id:13,date:"2026-03-06",pumpHours:3.5,tankLevel:90,electricityKwh:129,solarKwh:47,notes:"Low occupancy"},
+  {id:14,date:"2026-03-05",pumpHours:4.5,tankLevel:85,electricityKwh:148,solarKwh:40,notes:""},
 ];
 
 const INITIAL_FINANCIALS=[
@@ -389,11 +396,39 @@ const INITIAL_SURVEYS=[
 ];
 
 const INITIAL_MAINTENANCE=[
-  {id:1,asset:"AC Unit – Villa 3",issue:"Filter clogged, reduced airflow",priority:"High",parts:"AC Filter x2",reported:"2026-03-15",resolved:null,status:"Open",assignee:"Peter Kimani"},
-  {id:2,asset:"Borehole Pump",issue:"Unusual vibration at startup",priority:"High",parts:"Pump bearing set",reported:"2026-03-16",resolved:null,status:"In Progress",assignee:"James Okwany"},
-  {id:3,asset:"Pool Filter",issue:"Routine monthly descale",priority:"Low",parts:"Descaling solution 5L",reported:"2026-03-14",resolved:"2026-03-14",status:"Resolved",assignee:"James Okwany"},
-  {id:4,asset:"Showerheads – Villa 1 & 2",issue:"Weekly salty water descale protocol",priority:"Low",parts:"Vinegar solution, wire brush",reported:"2026-03-17",resolved:null,status:"Scheduled",assignee:"Mary Wanjiku"},
-  {id:5,asset:"Water Tank Valve",issue:"Slow drip, gasket needed",priority:"Medium",parts:"Rubber gasket x3",reported:"2026-03-16",resolved:"2026-03-17",status:"Resolved",assignee:"Peter Kimani"},
+  {id:1,asset:"AC Unit – Villa 3",issue:"Filter clogged, reduced airflow",priority:"High",parts:"AC Filter x2",reported:"2026-03-15",resolved:null,status:"Open",assignee:"Peter Kimani",partsCost:1200,labourHours:1.5},
+  {id:2,asset:"Borehole Pump",issue:"Unusual vibration at startup",priority:"High",parts:"Pump bearing set",reported:"2026-03-16",resolved:null,status:"In Progress",assignee:"James Okwany",partsCost:4500,labourHours:3},
+  {id:3,asset:"Pool Filter",issue:"Routine monthly descale",priority:"Low",parts:"Descaling solution 5L",reported:"2026-03-14",resolved:"2026-03-14",status:"Resolved",assignee:"James Okwany",partsCost:800,labourHours:2},
+  {id:4,asset:"Showerheads – Villa 1 & 2",issue:"Weekly salty water descale protocol",priority:"Low",parts:"Vinegar solution, wire brush",reported:"2026-03-17",resolved:null,status:"Scheduled",assignee:"Mary Wanjiku",partsCost:200,labourHours:1},
+  {id:5,asset:"Water Tank Valve",issue:"Slow drip, gasket needed",priority:"Medium",parts:"Rubber gasket x3",reported:"2026-03-16",resolved:"2026-03-17",status:"Resolved",assignee:"Peter Kimani",partsCost:350,labourHours:1.5},
+];
+const INITIAL_ASSETS=[
+  {id:1,name:"AC Unit",category:"HVAC",location:"Villas 1–10 (10 units)",purchaseDate:"2023-01-10",warranty:"2026-01-10",lastService:"2026-03-01",nextService:"2026-04-01",condition:"Good",value:85000,qty:10,notes:"Carrier split units. Salty air accelerates coil corrosion."},
+  {id:2,name:"Borehole Water Pump",category:"Water",location:"Pump House",purchaseDate:"2022-06-15",warranty:"2025-06-15",lastService:"2026-03-16",nextService:"2026-04-16",condition:"Fair",value:180000,qty:1,notes:"Grundfos submersible. Unusual vibration noted — monitor."},
+  {id:3,name:"Standby Water Pump",category:"Water",location:"Pump House",purchaseDate:"2022-06-15",warranty:"2025-06-15",lastService:"2026-02-10",nextService:"2026-05-10",condition:"Good",value:180000,qty:1,notes:"Backup pump. Test monthly."},
+  {id:4,name:"Diesel Generator",category:"Power",location:"Generator Room",purchaseDate:"2021-09-20",warranty:"2024-09-20",lastService:"2026-03-01",nextService:"2026-04-01",condition:"Good",value:950000,qty:1,notes:"Cummins 60kVA. Full load capacity for entire resort."},
+  {id:5,name:"Pool Filter System",category:"Pool",location:"Pool Plant Room",purchaseDate:"2022-04-05",warranty:"2025-04-05",lastService:"2026-03-14",nextService:"2026-04-14",condition:"Good",value:95000,qty:1,notes:"Sand filter + circulation pump. Monthly descale required."},
+  {id:6,name:"Industrial Gas Range",category:"Kitchen",location:"Main Kitchen",purchaseDate:"2022-03-01",warranty:"2025-03-01",lastService:"2026-02-20",nextService:"2026-05-20",condition:"Good",value:120000,qty:1,notes:"6-burner commercial range. Monthly deep clean."},
+  {id:7,name:"Commercial Refrigerators",category:"Kitchen",location:"Main Kitchen",purchaseDate:"2022-03-01",warranty:"2025-03-01",lastService:"2026-03-05",nextService:"2026-06-05",condition:"Good",value:75000,qty:2,notes:"Walk-in cold room + stand-alone fridge."},
+  {id:8,name:"Industrial Washing Machines",category:"Laundry",location:"Laundry Room",purchaseDate:"2023-02-14",warranty:"2026-02-14",lastService:"2026-03-10",nextService:"2026-04-10",condition:"Good",value:95000,qty:2,notes:"Samsung commercial grade. Descale monthly — salty water protocol."},
+  {id:9,name:"Solar PV Panels",category:"Power",location:"Rooftop",purchaseDate:"2023-07-01",warranty:"2033-07-01",lastService:"2026-02-01",nextService:"2026-05-01",condition:"Good",value:850000,qty:24,notes:"24 × 350W panels (8.4 kWp). Quarterly cleaning — dust reduces output 30%."},
+  {id:10,name:"Solar Inverter",category:"Power",location:"Generator Room",purchaseDate:"2023-07-01",warranty:"2028-07-01",lastService:"2026-02-01",nextService:"2026-08-01",condition:"Good",value:120000,qty:1,notes:"Growatt 10kW hybrid inverter with battery backup."},
+  {id:11,name:"Water Storage Tanks",category:"Water",location:"Tank Stand",purchaseDate:"2021-09-20",warranty:"2031-09-20",lastService:"2026-01-15",nextService:"2026-07-15",condition:"Good",value:45000,qty:2,notes:"2 × 10,000L Polytanks. Semi-annual clean required."},
+  {id:12,name:"CCTV System",category:"Security",location:"Reception + All Villas",purchaseDate:"2022-11-01",warranty:"2025-11-01",lastService:"2026-03-01",nextService:"2026-06-01",condition:"Good",value:65000,qty:1,notes:"24-camera DVR system. HDD health check quarterly."},
+];
+const PREVENTIVE_SCHEDULE=[
+  {id:1,task:"Salty Water Descale — Exec Bathtubs",frequency:"Weekly",dayOrDate:"Monday",category:"Water",assignee:"Mary Wanjiku",lastDone:"2026-04-14",nextDue:"2026-04-21",notes:"Use vinegar solution. Focus on taps and shower heads."},
+  {id:2,task:"Salty Water Descale — Showerheads (DL/DR)",frequency:"Weekly",dayOrDate:"Monday",category:"Water",assignee:"Mary Wanjiku",lastDone:"2026-04-14",nextDue:"2026-04-21",notes:"Soak heads in descaling solution overnight if heavily scaled."},
+  {id:3,task:"Pool Chemical Check & Balance",frequency:"Weekly",dayOrDate:"Wednesday",category:"Pool",assignee:"James Okwany",lastDone:"2026-04-16",nextDue:"2026-04-23",notes:"Test pH, chlorine, CYA. Adjust as needed."},
+  {id:4,task:"Generator Test Run (30 minutes)",frequency:"Weekly",dayOrDate:"Friday",category:"Power",assignee:"James Okwany",lastDone:"2026-04-11",nextDue:"2026-04-18",notes:"Run at 50% load minimum. Log fuel level before/after."},
+  {id:5,task:"AC Filter Clean — All Villas",frequency:"Monthly",dayOrDate:"1st Monday",category:"HVAC",assignee:"Peter Kimani",lastDone:"2026-03-03",nextDue:"2026-04-07",notes:"Remove and rinse filters. Salty dust clogs quickly in Turkana."},
+  {id:6,task:"Generator Full Service",frequency:"Monthly",dayOrDate:"1st Wednesday",category:"Power",assignee:"James Okwany",lastDone:"2026-03-05",nextDue:"2026-04-02",notes:"Check oil, coolant, belts, battery. Replace air filter if dusty."},
+  {id:7,task:"Borehole Pump Inspection",frequency:"Monthly",dayOrDate:"2nd Friday",category:"Water",assignee:"James Okwany",lastDone:"2026-03-08",nextDue:"2026-04-12",notes:"Check amperage draw, flow rate, vibration. Log any anomalies."},
+  {id:8,task:"Washing Machine Descale",frequency:"Monthly",dayOrDate:"2nd Monday",category:"Laundry",assignee:"Sarah Lopeyok",lastDone:"2026-03-10",nextDue:"2026-04-14",notes:"Run descale cycle. Salty water accelerates scale buildup."},
+  {id:9,task:"Deep Borehole & Tank Service",frequency:"Quarterly",dayOrDate:"Start of Quarter",category:"Water",assignee:"External Contractor",lastDone:"2026-01-15",nextDue:"2026-04-15",notes:"Professional borehole inspection and tank clean. Book contractor 2 weeks ahead."},
+  {id:10,task:"Solar Panel Cleaning",frequency:"Quarterly",dayOrDate:"Start of Quarter",category:"Power",assignee:"Peter Kimani",lastDone:"2026-02-01",nextDue:"2026-05-01",notes:"Dust reduces solar output by up to 30%. Use soft brush + distilled water."},
+  {id:11,task:"CCTV & Security System Check",frequency:"Quarterly",dayOrDate:"Start of Quarter",category:"Security",assignee:"James Okwany",lastDone:"2026-01-15",nextDue:"2026-04-15",notes:"Check all cameras, DVR storage, motion sensors."},
+  {id:12,task:"Kitchen Deep Clean & Equipment Service",frequency:"Monthly",dayOrDate:"Last Sunday",category:"Kitchen",assignee:"Chef Emmanuel Liru",lastDone:"2026-03-01",nextDue:"2026-04-05",notes:"Degrease range hood, clean behind fridges, descale coffee equipment."},
 ];
 
 const INITIAL_HOUSEKEEPING=[
@@ -1330,27 +1365,326 @@ const HousekeepingView=({tasks,setTasks})=>{
   </div>);
 };
 
-const MaintenanceView=({logs,setLogs})=>{
-  const[showForm,setShowForm]=useState(false);const[form,setForm]=useState({asset:"",issue:"",priority:"Low",parts:"",assignee:""});
-  const save=()=>{setLogs(p=>[{id:Date.now(),...form,reported:new Date().toISOString().split("T")[0],resolved:null,status:"Open"},...p]);setShowForm(false);setForm({asset:"",issue:"",priority:"Low",parts:"",assignee:""});};
-  const resolve=id=>setLogs(p=>p.map(l=>l.id===id?{...l,status:"Resolved",resolved:new Date().toISOString().split("T")[0]}:l));
+const MaintenanceView=({logs,setLogs,assets,setAssets,schedule,setSchedule})=>{
+  const[sub,setSub]=useState("log");
+  const TABS=[["log","🔧","Issue Log"],["assets","🏭","Asset Register"],["schedule","📅","PM Schedule"]];
   const pc=p=>p==="High"?C.danger:p==="Medium"?C.warning:C.sageD;
-  return(<div><div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:18}}><SectionTitle title="Maintenance Log" sub="Preventive & corrective maintenance tracker"/><button onClick={()=>setShowForm(!showForm)} style={{background:`linear-gradient(135deg,${C.terra},${C.terraL})`,color:"white",padding:"10px 16px",borderRadius:12,border:"none",cursor:"pointer",fontWeight:700,fontSize:13}}>+ Log Issue</button></div>
-    <div style={{background:`linear-gradient(135deg,${C.warning},#FF9800)`,borderRadius:12,padding:"12px 16px",marginBottom:16,color:"white"}}><div style={{fontWeight:800,fontSize:13,marginBottom:3}}>🔄 Weekly Preventive — Salty Water Borehole Protocol</div><div style={{fontSize:11,opacity:0.9,lineHeight:1.7}}>Every Monday: Exec rooms — descale bathtubs, taps. Deluxe rooms — descale showerheads. Pool filter check. Kitchen appliances inspection.</div></div>
-    {showForm&&(<Card style={{marginBottom:14,border:`2px solid ${C.terra}`}}><div style={{fontSize:14,fontWeight:800,color:C.navy,marginBottom:14}}>Log Issue</div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}><Field label="Asset"><input value={form.asset} onChange={e=>setForm(p=>({...p,asset:e.target.value}))} style={inp}/></Field><Field label="Assigned To"><input value={form.assignee} onChange={e=>setForm(p=>({...p,assignee:e.target.value}))} style={inp}/></Field><Field label="Parts Needed"><input value={form.parts} onChange={e=>setForm(p=>({...p,parts:e.target.value}))} style={inp}/></Field><Field label="Priority"><select value={form.priority} onChange={e=>setForm(p=>({...p,priority:e.target.value}))} style={inp}><option>High</option><option>Medium</option><option>Low</option></select></Field><Field label="Issue Description" col="1/-1"><textarea value={form.issue} onChange={e=>setForm(p=>({...p,issue:e.target.value}))} rows={3} style={{...inp,resize:"vertical"}}/></Field></div><div style={{display:"flex",gap:10,marginTop:12}}><button onClick={save} style={{background:C.terra,color:"white",padding:"10px 20px",borderRadius:10,border:"none",cursor:"pointer",fontWeight:700}}>Save</button><button onClick={()=>setShowForm(false)} style={{background:C.border,color:C.textM,padding:"10px 20px",borderRadius:10,border:"none",cursor:"pointer"}}>Cancel</button></div></Card>)}
-    {logs.map(log=>(<Card key={log.id} style={{marginBottom:10,borderLeft:`4px solid ${pc(log.priority)}`}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:10}}><div style={{flex:1}}><div style={{display:"flex",gap:9,alignItems:"center",marginBottom:5,flexWrap:"wrap"}}><div style={{fontSize:14,fontWeight:800,color:C.text}}>{log.asset}</div><span style={{fontSize:11,padding:"2px 9px",borderRadius:10,fontWeight:800,background:log.priority==="High"?"#FFEBEE":log.priority==="Medium"?"#FFF8E1":"#E8F5E9",color:pc(log.priority)}}>{log.priority}</span></div><div style={{fontSize:12,color:C.textM,marginBottom:5}}>{log.issue}</div><div style={{fontSize:11,color:C.textL}}>🔧 {log.assignee} · 📅 {log.reported}{log.resolved&&` · ✅ ${log.resolved}`}</div></div><div style={{display:"flex",flexDirection:"column",gap:8,alignItems:"flex-end"}}><Badge label={log.status}/>{log.status!=="Resolved"&&<button onClick={()=>resolve(log.id)} style={{padding:"5px 12px",borderRadius:8,background:C.sage,color:"white",border:"none",cursor:"pointer",fontSize:11,fontWeight:700}}>✓ Resolve</button>}</div></div></Card>))}
+  const openCount=logs.filter(l=>l.status==="Open"||l.status==="In Progress").length;
+  const totalCost=logs.reduce((s,l)=>s+(l.partsCost||0)+(l.labourHours||0)*800,0);
+
+  const LogTab=()=>{
+    const[showForm,setShowForm]=useState(false);
+    const[form,setForm]=useState({asset:"",issue:"",priority:"Low",parts:"",assignee:"",partsCost:"",labourHours:""});
+    const save=()=>{
+      setLogs(p=>[{id:Date.now(),...form,partsCost:parseFloat(form.partsCost)||0,labourHours:parseFloat(form.labourHours)||0,reported:new Date().toISOString().split("T")[0],resolved:null,status:"Open"},...p]);
+      setShowForm(false);setForm({asset:"",issue:"",priority:"Low",parts:"",assignee:"",partsCost:"",labourHours:""});
+    };
+    const resolve=id=>setLogs(p=>p.map(l=>l.id===id?{...l,status:"Resolved",resolved:new Date().toISOString().split("T")[0]}:l));
+    return(<div>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10}}>
+          {[{bg:"#FFEBEE",b:"#EF9A9A",tx:C.danger,l:"Open Issues",v:openCount},{bg:"#FFF8E1",b:"#FFE082",tx:"#F57F17",l:"In Progress",v:logs.filter(l=>l.status==="In Progress").length},{bg:"#E8F5E9",b:"#81C784",tx:C.sageD,l:"Total Spend",v:`KSh ${totalCost.toLocaleString()}`}].map(s=>(<div key={s.l} style={{background:s.bg,borderRadius:12,padding:"10px 14px",border:`1px solid ${s.b}`}}><div style={{fontSize:18,fontWeight:900,color:s.tx}}>{s.v}</div><div style={{fontSize:10,color:C.textL}}>{s.l}</div></div>))}
+        </div>
+        <button onClick={()=>setShowForm(!showForm)} style={{background:`linear-gradient(135deg,${C.terra},${C.terraL})`,color:"white",padding:"10px 16px",borderRadius:12,border:"none",cursor:"pointer",fontWeight:700,fontSize:13}}>+ Log Issue</button>
+      </div>
+      <div style={{background:`linear-gradient(135deg,${C.warning},#FF9800)`,borderRadius:12,padding:"12px 16px",marginBottom:14,color:"white"}}><div style={{fontWeight:800,fontSize:13,marginBottom:3}}>🔄 Weekly Preventive — Salty Water Borehole Protocol</div><div style={{fontSize:11,opacity:0.9,lineHeight:1.7}}>Every Monday: Exec rooms — descale bathtubs, taps. Deluxe rooms — descale showerheads. Pool filter check. Kitchen appliances inspection.</div></div>
+      {showForm&&(<Card style={{marginBottom:14,border:`2px solid ${C.terra}`}}>
+        <div style={{fontSize:14,fontWeight:800,color:C.navy,marginBottom:14}}>Log Maintenance Issue</div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+          <Field label="Asset / Location"><input value={form.asset} onChange={e=>setForm(p=>({...p,asset:e.target.value}))} style={inp} placeholder="e.g. AC Unit – Villa 3"/></Field>
+          <Field label="Assigned To"><input value={form.assignee} onChange={e=>setForm(p=>({...p,assignee:e.target.value}))} style={inp}/></Field>
+          <Field label="Parts Needed"><input value={form.parts} onChange={e=>setForm(p=>({...p,parts:e.target.value}))} style={inp}/></Field>
+          <Field label="Priority"><select value={form.priority} onChange={e=>setForm(p=>({...p,priority:e.target.value}))} style={inp}><option>High</option><option>Medium</option><option>Low</option></select></Field>
+          <Field label="Parts Cost (KSh)"><input type="number" value={form.partsCost} onChange={e=>setForm(p=>({...p,partsCost:e.target.value}))} style={inp} placeholder="0"/></Field>
+          <Field label="Labour Hours"><input type="number" step="0.5" value={form.labourHours} onChange={e=>setForm(p=>({...p,labourHours:e.target.value}))} style={inp} placeholder="0"/></Field>
+          <Field label="Issue Description" col="1/-1"><textarea value={form.issue} onChange={e=>setForm(p=>({...p,issue:e.target.value}))} rows={3} style={{...inp,resize:"vertical"}}/></Field>
+        </div>
+        <div style={{display:"flex",gap:10,marginTop:12}}><button onClick={save} style={{background:C.terra,color:"white",padding:"10px 20px",borderRadius:10,border:"none",cursor:"pointer",fontWeight:700}}>Save</button><button onClick={()=>setShowForm(false)} style={{background:C.border,color:C.textM,padding:"10px 20px",borderRadius:10,border:"none",cursor:"pointer"}}>Cancel</button></div>
+      </Card>)}
+      {logs.map(log=>{
+        const cost=(log.partsCost||0)+(log.labourHours||0)*800;
+        return(<Card key={log.id} style={{marginBottom:10,borderLeft:`4px solid ${pc(log.priority)}`}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:10}}>
+            <div style={{flex:1}}>
+              <div style={{display:"flex",gap:9,alignItems:"center",marginBottom:5,flexWrap:"wrap"}}>
+                <div style={{fontSize:14,fontWeight:800,color:C.text}}>{log.asset}</div>
+                <span style={{fontSize:11,padding:"2px 9px",borderRadius:10,fontWeight:800,background:log.priority==="High"?"#FFEBEE":log.priority==="Medium"?"#FFF8E1":"#E8F5E9",color:pc(log.priority)}}>{log.priority}</span>
+              </div>
+              <div style={{fontSize:12,color:C.textM,marginBottom:5}}>{log.issue}</div>
+              <div style={{fontSize:11,color:C.textL}}>🔧 {log.assignee} · 📅 {log.reported}{log.resolved&&` · ✅ ${log.resolved}`}</div>
+              {(log.partsCost>0||log.labourHours>0)&&<div style={{marginTop:6,display:"flex",gap:10,flexWrap:"wrap"}}>
+                {log.partsCost>0&&<span style={{fontSize:11,background:"#FFF3E0",color:C.warning,padding:"2px 8px",borderRadius:8,fontWeight:700}}>Parts: KSh {log.partsCost.toLocaleString()}</span>}
+                {log.labourHours>0&&<span style={{fontSize:11,background:"#E3F2FD",color:C.info,padding:"2px 8px",borderRadius:8,fontWeight:700}}>{log.labourHours}h labour</span>}
+                {cost>0&&<span style={{fontSize:11,background:"#F3E5F5",color:"#6A1B9A",padding:"2px 8px",borderRadius:8,fontWeight:700}}>Total: KSh {cost.toLocaleString()}</span>}
+              </div>}
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:8,alignItems:"flex-end"}}>
+              <Badge label={log.status}/>
+              {log.status!=="Resolved"&&<button onClick={()=>setLogs(p=>p.map(l=>l.id===log.id?{...l,status:"Resolved",resolved:new Date().toISOString().split("T")[0]}:l))} style={{padding:"5px 12px",borderRadius:8,background:C.sage,color:"white",border:"none",cursor:"pointer",fontSize:11,fontWeight:700}}>✓ Resolve</button>}
+            </div>
+          </div>
+        </Card>);
+      })}
+    </div>);
+  };
+
+  const AssetsTab=()=>{
+    const[sel,setSel]=useState(null);
+    const cond=c=>c==="Good"?C.sageD:c==="Fair"?C.warning:C.danger;
+    const condBg=c=>c==="Good"?"#E8F5E9":c==="Fair"?"#FFF8E1":"#FFEBEE";
+    const totalValue=(assets||[]).reduce((s,a)=>s+a.value*(a.qty||1),0);
+    const goodCount=(assets||[]).filter(a=>a.condition==="Good").length;
+    const fairCount=(assets||[]).filter(a=>a.condition==="Fair").length;
+    const poorCount=(assets||[]).filter(a=>a.condition==="Poor").length;
+    const now=new Date();
+    const isOverdue=a=>{if(!a.nextService)return false;return new Date(a.nextService)<now;};
+    const isDueSoon=a=>{if(!a.nextService)return false;const d=new Date(a.nextService);const diff=(d-now)/(1000*60*60*24);return diff>=0&&diff<=30;};
+    const overdueCount=(assets||[]).filter(isOverdue).length;
+    return(<div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:10,marginBottom:14}}>
+        {[{bg:"#E8F5E9",b:"#81C784",tx:C.sageD,l:"Good",v:goodCount},{bg:"#FFF8E1",b:"#FFE082",tx:"#F57F17",l:"Fair",v:fairCount},{bg:"#FFEBEE",b:"#EF9A9A",tx:C.danger,l:"Poor",v:poorCount},{bg:overdueCount>0?"#FFEBEE":"#E8F5E9",b:overdueCount>0?"#EF9A9A":"#81C784",tx:overdueCount>0?C.danger:C.sageD,l:"Service Overdue",v:overdueCount},{bg:C.sandL,b:C.border,tx:C.navy,l:"Total Asset Value",v:`KSh ${(totalValue/1000).toFixed(0)}k`}].map(s=>(<div key={s.l} style={{background:s.bg,borderRadius:12,padding:"10px 14px",border:`1px solid ${s.b}`}}><div style={{fontSize:18,fontWeight:900,color:s.tx}}>{s.v}</div><div style={{fontSize:10,color:C.textL}}>{s.l}</div></div>))}
+      </div>
+      {overdueCount>0&&<div style={{padding:"10px 16px",background:"#FFEBEE",border:`1px solid #EF9A9A`,borderRadius:10,marginBottom:12,fontSize:13,color:C.danger,fontWeight:700}}>⚠️ {overdueCount} asset{overdueCount>1?"s":""} overdue for service. Schedule maintenance immediately.</div>}
+      <div style={{display:"flex",flexDirection:"column",gap:8}}>
+        {(assets||[]).map(a=>{
+          const overdue=isOverdue(a);const dueSoon=isDueSoon(a);const warrantExpired=a.warranty&&new Date(a.warranty)<now;
+          return(<Card key={a.id} style={{cursor:"pointer",border:`1px solid ${overdue?C.danger:dueSoon?"#FFE082":C.border}`}} >
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:10}} onClick={()=>setSel(sel===a.id?null:a.id)}>
+              <div style={{flex:1}}>
+                <div style={{display:"flex",gap:9,alignItems:"center",marginBottom:4,flexWrap:"wrap"}}>
+                  <div style={{fontSize:14,fontWeight:800,color:C.navy}}>{a.name}{a.qty>1&&<span style={{fontSize:11,color:C.textL,fontWeight:400}}> ×{a.qty}</span>}</div>
+                  <span style={{fontSize:11,padding:"2px 9px",borderRadius:10,fontWeight:700,background:condBg(a.condition),color:cond(a.condition)}}>{a.condition}</span>
+                  {overdue&&<span style={{fontSize:11,padding:"2px 9px",borderRadius:10,fontWeight:700,background:"#FFEBEE",color:C.danger}}>⚠️ Overdue</span>}
+                  {!overdue&&dueSoon&&<span style={{fontSize:11,padding:"2px 9px",borderRadius:10,fontWeight:700,background:"#FFF8E1",color:C.warning}}>🔔 Due Soon</span>}
+                </div>
+                <div style={{fontSize:12,color:C.textM}}>{a.category} · {a.location}</div>
+                <div style={{fontSize:11,color:C.textL,marginTop:3}}>Next service: <strong style={{color:overdue?C.danger:C.text}}>{a.nextService}</strong> · Last: {a.lastService}</div>
+              </div>
+              <div style={{textAlign:"right"}}>
+                <div style={{fontSize:16,fontWeight:900,color:C.navy}}>KSh {(a.value*(a.qty||1)).toLocaleString()}</div>
+                <div style={{fontSize:10,color:C.textL}}>asset value</div>
+                {warrantExpired&&<div style={{fontSize:10,color:C.danger,fontWeight:700,marginTop:3}}>⚠️ Warranty expired</div>}
+              </div>
+            </div>
+            {sel===a.id&&(<div style={{marginTop:12,paddingTop:12,borderTop:`1px solid ${C.border}`}}>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10,marginBottom:8}}>
+                {[["Purchase Date",a.purchaseDate],["Warranty Until",a.warranty||"—"],["Quantity",a.qty||1]].map(([l,v])=>(<div key={l}><div style={{fontSize:10,color:C.textL,fontWeight:700,textTransform:"uppercase",letterSpacing:1}}>{l}</div><div style={{fontSize:13,fontWeight:700,color:C.text}}>{v}</div></div>))}
+              </div>
+              {a.notes&&<div style={{fontSize:12,color:C.textM,fontStyle:"italic",background:C.sandL,padding:"8px 12px",borderRadius:8}}>{a.notes}</div>}
+            </div>)}
+          </Card>);
+        })}
+      </div>
+    </div>);
+  };
+
+  const ScheduleTab=()=>{
+    const now=new Date();
+    const isOverdue=s=>{if(!s.nextDue)return false;return new Date(s.nextDue)<now;};
+    const daysUntil=s=>{if(!s.nextDue)return null;return Math.ceil((new Date(s.nextDue)-now)/(1000*60*60*24));};
+    const freqColor={Weekly:C.info,Monthly:C.sageD,Quarterly:C.terra};
+    const overdueItems=(schedule||[]).filter(isOverdue);
+    const createIssue=(task)=>{
+      setLogs(p=>[{id:Date.now(),asset:task.task,issue:`Scheduled: ${task.frequency} ${task.category} maintenance`,priority:"Low",parts:"",assignee:task.assignee,partsCost:0,labourHours:0,reported:new Date().toISOString().split("T")[0],resolved:null,status:"Scheduled"},...p]);
+      setSchedule(p=>p.map(s=>s.id===task.id?{...s,lastDone:new Date().toISOString().split("T")[0]}:s));
+    };
+    return(<div>
+      {overdueItems.length>0&&<div style={{padding:"10px 16px",background:"#FFEBEE",border:`1px solid #EF9A9A`,borderRadius:10,marginBottom:12,fontSize:13,color:C.danger,fontWeight:700}}>
+        🚨 {overdueItems.length} overdue task{overdueItems.length>1?"s":" "}— schedule immediately!
+      </div>}
+      <div style={{display:"flex",gap:8,marginBottom:14,flexWrap:"wrap"}}>
+        {[["All",""],[" Weekly",C.info],["Monthly",C.sageD],["Quarterly",C.terra]].map(([f,c])=>{
+          const key=f.trim();const count=key==="All"?(schedule||[]).length:(schedule||[]).filter(s=>s.frequency===key).length;
+          return(<span key={f} style={{padding:"4px 12px",borderRadius:20,background:key==="All"?C.navy:c||C.navy,color:"white",fontSize:11,fontWeight:700}}>{f.trim()} ({count})</span>);
+        })}
+      </div>
+      {["Weekly","Monthly","Quarterly"].map(freq=>{
+        const items=(schedule||[]).filter(s=>s.frequency===freq);
+        if(!items.length)return null;
+        return(<div key={freq} style={{marginBottom:16}}>
+          <div style={{fontSize:12,fontWeight:800,color:freqColor[freq],marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>🔄 {freq}</div>
+          {items.map(task=>{
+            const overdue=isOverdue(task);const days=daysUntil(task);
+            return(<Card key={task.id} style={{marginBottom:8,borderLeft:`4px solid ${overdue?C.danger:freqColor[freq]}`,padding:"12px 16px"}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:10}}>
+                <div style={{flex:1}}>
+                  <div style={{fontSize:13,fontWeight:800,color:C.text,marginBottom:3}}>{task.task}</div>
+                  <div style={{fontSize:11,color:C.textL}}>🔧 {task.assignee} · 📅 {task.dayOrDate} · Last: {task.lastDone}</div>
+                  {task.notes&&<div style={{fontSize:11,color:C.textM,marginTop:3,fontStyle:"italic"}}>{task.notes}</div>}
+                </div>
+                <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:6}}>
+                  <div style={{fontSize:12,fontWeight:800,color:overdue?C.danger:days!=null&&days<=7?C.warning:C.sageD}}>
+                    {overdue?`⚠️ ${Math.abs(days)}d overdue`:days!=null?days===0?"Due today":`Due in ${days}d`:"—"}
+                  </div>
+                  <button onClick={()=>createIssue(task)} style={{padding:"5px 12px",borderRadius:8,background:C.navy,color:"white",border:"none",cursor:"pointer",fontSize:11,fontWeight:700}}>Auto-Create Issue</button>
+                </div>
+              </div>
+            </Card>);
+          })}
+        </div>);
+      })}
+    </div>);
+  };
+
+  return(<div>
+    <SectionTitle title="Maintenance" sub="Issue log · Asset register · Preventive schedule"/>
+    <SubTabs tabs={TABS} active={sub} setActive={setSub}/>
+    {sub==="log"&&<LogTab/>}
+    {sub==="assets"&&<AssetsTab/>}
+    {sub==="schedule"&&<ScheduleTab/>}
   </div>);
 };
 
 const WaterPowerView=({readings,setReadings})=>{
-  const[showForm,setShowForm]=useState(false);const[form,setForm]=useState({date:new Date().toISOString().split("T")[0],pumpHours:"",tankLevel:"",electricityKwh:"",notes:""});
-  const avgKwh=Math.round(readings.reduce((s,r)=>s+r.electricityKwh,0)/readings.length);const avgPump=(readings.reduce((s,r)=>s+r.pumpHours,0)/readings.length).toFixed(1);
-  const save=()=>{setReadings(p=>[{id:Date.now(),...form,pumpHours:parseFloat(form.pumpHours),tankLevel:parseInt(form.tankLevel),electricityKwh:parseInt(form.electricityKwh)},...p]);setShowForm(false);};
-  return(<div><div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:18}}><SectionTitle title="Water & Power Tracker" sub="Daily stewardship of borehole pump and electricity"/><button onClick={()=>setShowForm(!showForm)} style={{background:`linear-gradient(135deg,#1565C0,#1976D2)`,color:"white",padding:"10px 16px",borderRadius:12,border:"none",cursor:"pointer",fontWeight:700,fontSize:13}}>+ Add Reading</button></div>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12,marginBottom:16}}>{[{icon:"⚡",label:"Avg Daily Power",val:`${avgKwh} kWh`,color:"#F57F17",bg:"#FFF8E1"},{icon:"⏱",label:"Avg Pump Hours",val:`${avgPump} hrs`,color:C.info,bg:"#E3F2FD"},{icon:"🛢",label:"Tank Level",val:`${readings[0]?.tankLevel||0}%`,color:readings[0]?.tankLevel>50?C.sageD:C.terra,bg:readings[0]?.tankLevel>50?"#E8F5E9":"#FFEBEE"}].map(s=>(<div key={s.label} style={{background:s.bg,borderRadius:14,padding:16,border:`1px solid ${C.border}`}}><div style={{fontSize:26,marginBottom:5}}>{s.icon}</div><div style={{fontSize:22,fontWeight:900,color:s.color}}>{s.val}</div><div style={{fontSize:11,color:C.textL}}>{s.label}</div></div>))}</div>
-    <Card style={{marginBottom:14}}><div style={{fontSize:12,fontWeight:800,color:C.navy,marginBottom:12}}>⚡ Daily kWh</div><div style={{display:"flex",alignItems:"flex-end",gap:8,height:90}}>{readings.slice(0,7).reverse().map((r,i)=>{const h=(r.electricityKwh/200)*100;const col=r.electricityKwh>155?"#E53935":r.electricityKwh>145?"#FB8C00":"#1976D2";return(<div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:3}}><div style={{fontSize:9,color:C.textL,fontWeight:700}}>{r.electricityKwh}</div><div style={{width:"100%",height:`${h}%`,background:col,borderRadius:"3px 3px 0 0",minHeight:6}}/><div style={{fontSize:8,color:C.textL}}>{r.date.slice(5)}</div></div>);})}</div></Card>
-    {showForm&&(<Card style={{marginBottom:14,border:`2px solid #1565C0`}}><div style={{fontSize:14,fontWeight:800,color:C.navy,marginBottom:12}}>Daily Reading</div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>{[["date","Date","date"],["pumpHours","Pump Hours","number"],["tankLevel","Tank Level (%)","number"],["electricityKwh","Electricity (kWh)","number"]].map(([k,l,t])=>(<Field key={k} label={l}><input type={t} value={form[k]} onChange={e=>setForm(p=>({...p,[k]:e.target.value}))} style={inp}/></Field>))}<Field label="Notes" col="1/-1"><input value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={inp}/></Field></div><div style={{display:"flex",gap:10,marginTop:12}}><button onClick={save} style={{background:"#1565C0",color:"white",padding:"10px 20px",borderRadius:10,border:"none",cursor:"pointer",fontWeight:700}}>Save</button><button onClick={()=>setShowForm(false)} style={{background:C.border,color:C.textM,padding:"10px 20px",borderRadius:10,border:"none",cursor:"pointer"}}>Cancel</button></div></Card>)}
-    <Card style={{padding:0,overflow:"hidden"}}><div style={{display:"grid",gridTemplateColumns:"1.5fr 1fr 1fr 1fr 2fr",gap:8,padding:"10px 16px",background:`${C.navy}07`,borderBottom:`1px solid ${C.border}`}}>{["Date","Pump hrs","Tank","kWh","Notes"].map(h=><div key={h} style={{fontSize:10,fontWeight:800,color:C.textL,textTransform:"uppercase",letterSpacing:1}}>{h}</div>)}</div>{readings.map((r,i)=>(<div key={r.id} style={{display:"grid",gridTemplateColumns:"1.5fr 1fr 1fr 1fr 2fr",gap:8,padding:"11px 16px",borderBottom:`1px solid ${C.border}`,alignItems:"center",background:i%2===0?"white":`${C.sand}40`}}><div style={{fontSize:12,fontWeight:700}}>{r.date}</div><div style={{fontSize:12}}>⏱ {r.pumpHours}h</div><div style={{fontSize:12,fontWeight:700,color:r.tankLevel<50?C.danger:C.sageD}}>💧 {r.tankLevel}%</div><div style={{fontSize:12}}>⚡ {r.electricityKwh}</div><div style={{fontSize:11,color:C.textL,fontStyle:r.notes?"normal":"italic"}}>{r.notes||"—"}</div></div>))}</Card>
+  const[sub,setSub]=useState("daily");
+  const TABS=[["daily","📊","Daily Log"],["monthly","📈","Monthly"],["solar","☀️","Solar"]];
+  const latest=readings[0]||{};
+  const avgKwh=Math.round(readings.reduce((s,r)=>s+r.electricityKwh,0)/readings.length);
+  const avgPump=(readings.reduce((s,r)=>s+r.pumpHours,0)/readings.length).toFixed(1);
+  const alerts=[];
+  if(latest.electricityKwh>155)alerts.push({icon:"⚡",msg:`High power use: ${latest.electricityKwh} kWh (threshold: 155)`,level:"red"});
+  else if(latest.electricityKwh>145)alerts.push({icon:"⚡",msg:`Elevated power: ${latest.electricityKwh} kWh`,level:"yellow"});
+  if(latest.tankLevel<50)alerts.push({icon:"💧",msg:`Tank level critical: ${latest.tankLevel}% — pump now`,level:"red"});
+  else if(latest.tankLevel<70)alerts.push({icon:"💧",msg:`Tank level low: ${latest.tankLevel}%`,level:"yellow"});
+  if(latest.pumpHours>5)alerts.push({icon:"⏱",msg:`Pump ran ${latest.pumpHours} hrs — check for leaks`,level:"red"});
+  else if(latest.pumpHours>4)alerts.push({icon:"⏱",msg:`Pump hours elevated: ${latest.pumpHours} hrs`,level:"yellow"});
+
+  const DailyTab=()=>{
+    const[showForm,setShowForm]=useState(false);
+    const[form,setForm]=useState({date:new Date().toISOString().split("T")[0],pumpHours:"",tankLevel:"",electricityKwh:"",solarKwh:"",notes:""});
+    const save=()=>{setReadings(p=>[{id:Date.now(),...form,pumpHours:parseFloat(form.pumpHours)||0,tankLevel:parseInt(form.tankLevel)||0,electricityKwh:parseInt(form.electricityKwh)||0,solarKwh:parseInt(form.solarKwh)||0},...p]);setShowForm(false);setForm({date:new Date().toISOString().split("T")[0],pumpHours:"",tankLevel:"",electricityKwh:"",solarKwh:"",notes:""});};
+    return(<div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:12,marginBottom:14}}>
+        {[{icon:"⚡",label:"Avg Daily Power",val:`${avgKwh} kWh`,color:"#F57F17",bg:"#FFF8E1"},{icon:"⏱",label:"Avg Pump Hours",val:`${avgPump} hrs`,color:C.info,bg:"#E3F2FD"},{icon:"🛢",label:"Tank Level",val:`${latest.tankLevel||0}%`,color:latest.tankLevel>50?C.sageD:C.terra,bg:latest.tankLevel>50?"#E8F5E9":"#FFEBEE"},{icon:"☀️",label:"Solar Today",val:`${latest.solarKwh||0} kWh`,color:C.gold,bg:"#FFF8E1"}].map(s=>(<div key={s.label} style={{background:s.bg,borderRadius:14,padding:16,border:`1px solid ${C.border}`}}><div style={{fontSize:26,marginBottom:5}}>{s.icon}</div><div style={{fontSize:22,fontWeight:900,color:s.color}}>{s.val}</div><div style={{fontSize:11,color:C.textL}}>{s.label}</div></div>))}
+      </div>
+      <Card style={{marginBottom:14}}><div style={{fontSize:12,fontWeight:800,color:C.navy,marginBottom:12}}>⚡ Daily kWh (7 days)</div><div style={{display:"flex",alignItems:"flex-end",gap:8,height:90}}>{readings.slice(0,7).reverse().map((r,i)=>{const h=Math.max((r.electricityKwh/200)*100,4);const col=r.electricityKwh>155?"#E53935":r.electricityKwh>145?"#FB8C00":"#1976D2";return(<div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:3}}><div style={{fontSize:9,color:C.textL,fontWeight:700}}>{r.electricityKwh}</div><div style={{width:"100%",height:`${h}%`,background:col,borderRadius:"3px 3px 0 0",minHeight:6}}/><div style={{fontSize:8,color:C.textL}}>{r.date.slice(5)}</div></div>);})}</div></Card>
+      <div style={{display:"flex",justifyContent:"flex-end",marginBottom:12}}><button onClick={()=>setShowForm(!showForm)} style={{background:`linear-gradient(135deg,#1565C0,#1976D2)`,color:"white",padding:"10px 16px",borderRadius:12,border:"none",cursor:"pointer",fontWeight:700,fontSize:13}}>+ Add Reading</button></div>
+      {showForm&&(<Card style={{marginBottom:14,border:`2px solid #1565C0`}}><div style={{fontSize:14,fontWeight:800,color:C.navy,marginBottom:12}}>Daily Reading</div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>{[["date","Date","date"],["pumpHours","Pump Hours","number"],["tankLevel","Tank Level (%)","number"],["electricityKwh","Grid Electricity (kWh)","number"],["solarKwh","Solar Generated (kWh)","number"]].map(([k,l,t])=>(<Field key={k} label={l}><input type={t} value={form[k]} onChange={e=>setForm(p=>({...p,[k]:e.target.value}))} style={inp}/></Field>))}<Field label="Notes" col="1/-1"><input value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={inp}/></Field></div><div style={{display:"flex",gap:10,marginTop:12}}><button onClick={save} style={{background:"#1565C0",color:"white",padding:"10px 20px",borderRadius:10,border:"none",cursor:"pointer",fontWeight:700}}>Save</button><button onClick={()=>setShowForm(false)} style={{background:C.border,color:C.textM,padding:"10px 20px",borderRadius:10,border:"none",cursor:"pointer"}}>Cancel</button></div></Card>)}
+      <Card style={{padding:0,overflow:"hidden"}}>
+        <div style={{display:"grid",gridTemplateColumns:"1.2fr 0.8fr 0.8fr 0.8fr 0.8fr 1.8fr",gap:8,padding:"10px 16px",background:`${C.navy}07`,borderBottom:`1px solid ${C.border}`}}>{["Date","Pump","Tank","Grid kWh","Solar","Notes"].map(h=><div key={h} style={{fontSize:10,fontWeight:800,color:C.textL,textTransform:"uppercase",letterSpacing:1}}>{h}</div>)}</div>
+        {readings.map((r,i)=>(
+          <div key={r.id} style={{display:"grid",gridTemplateColumns:"1.2fr 0.8fr 0.8fr 0.8fr 0.8fr 1.8fr",gap:8,padding:"10px 16px",borderBottom:`1px solid ${C.border}`,alignItems:"center",background:i%2===0?"white":`${C.sand}40`}}>
+            <div style={{fontSize:12,fontWeight:700}}>{r.date}</div>
+            <div style={{fontSize:12,color:r.pumpHours>5?C.danger:r.pumpHours>4?C.warning:C.text}}>⏱ {r.pumpHours}h</div>
+            <div style={{fontSize:12,fontWeight:700,color:r.tankLevel<50?C.danger:r.tankLevel<70?C.warning:C.sageD}}>💧 {r.tankLevel}%</div>
+            <div style={{fontSize:12,color:r.electricityKwh>155?C.danger:r.electricityKwh>145?C.warning:"#1565C0"}}>⚡ {r.electricityKwh}</div>
+            <div style={{fontSize:12,color:C.gold}}>☀️ {r.solarKwh||0}</div>
+            <div style={{fontSize:11,color:C.textL,fontStyle:r.notes?"normal":"italic"}}>{r.notes||"—"}</div>
+          </div>
+        ))}
+      </Card>
+    </div>);
+  };
+
+  const MonthlyTab=()=>{
+    const now=new Date();
+    const thisMonth=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}`;
+    const lastMonthDate=new Date(now.getFullYear(),now.getMonth()-1,1);
+    const lastMonth=`${lastMonthDate.getFullYear()}-${String(lastMonthDate.getMonth()+1).padStart(2,"0")}`;
+    const thisData=readings.filter(r=>r.date.startsWith(thisMonth));
+    const lastData=readings.filter(r=>r.date.startsWith(lastMonth));
+    const avg=(arr,key)=>arr.length?parseFloat((arr.reduce((s,r)=>s+(r[key]||0),0)/arr.length).toFixed(1)):0;
+    const metrics=[
+      {key:"electricityKwh",label:"Avg Daily kWh",icon:"⚡",unit:"kWh",lowerIsBetter:true,color:"#F57F17"},
+      {key:"pumpHours",label:"Avg Pump Hours",icon:"⏱",unit:"hrs",lowerIsBetter:true,color:C.info},
+      {key:"tankLevel",label:"Avg Tank Level",icon:"💧",unit:"%",lowerIsBetter:false,color:C.sageD},
+      {key:"solarKwh",label:"Avg Solar kWh",icon:"☀️",unit:"kWh",lowerIsBetter:false,color:C.gold},
+    ];
+    const trend=(cur,prev,lowerIsBetter)=>{if(!prev)return null;const pct=Math.round(((cur-prev)/Math.max(prev,1))*100);const good=lowerIsBetter?cur<prev:cur>prev;return{pct,good,arrow:cur>prev?"▲":"▼"};};
+    return(<div>
+      <div style={{marginBottom:12,padding:"8px 14px",background:C.sandL,borderRadius:8,fontSize:12,color:C.textM}}>Comparing <strong>{thisMonth}</strong> vs <strong>{lastMonth}</strong> · {thisData.length} readings this month, {lastData.length} last month</div>
+      {thisData.length===0&&<div style={{padding:20,textAlign:"center",color:C.textL}}>No readings this month yet. Add daily readings to see comparison.</div>}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:16}}>
+        {metrics.map(m=>{
+          const cur=avg(thisData,m.key),prev=avg(lastData,m.key);const t=trend(cur,prev,m.lowerIsBetter);
+          return(<Card key={m.key} style={{padding:"14px 18px"}}>
+            <div style={{fontSize:22,marginBottom:6}}>{m.icon}</div>
+            <div style={{fontSize:11,color:C.textL,fontWeight:700,textTransform:"uppercase",letterSpacing:1}}>{m.label}</div>
+            <div style={{display:"flex",alignItems:"baseline",gap:10,marginTop:4}}>
+              <div style={{fontSize:28,fontWeight:900,color:m.color}}>{cur} <span style={{fontSize:13,fontWeight:400}}>{m.unit}</span></div>
+              {t&&<div style={{fontSize:14,fontWeight:800,color:t.good?C.sageD:C.danger}}>{t.arrow} {Math.abs(t.pct)}%</div>}
+            </div>
+            <div style={{fontSize:12,color:C.textL,marginTop:4}}>Last month: {prev} {m.unit}</div>
+            {t&&<div style={{marginTop:8,background:C.sandL,borderRadius:8,overflow:"hidden",height:6}}><div style={{width:`${Math.min(Math.abs(t.pct)+50,100)}%`,height:"100%",background:t.good?C.sageD:C.danger,borderRadius:8}}/></div>}
+          </Card>);
+        })}
+      </div>
+      <Card>
+        <div style={{fontSize:13,fontWeight:800,color:C.navy,marginBottom:12}}>📊 30-Day kWh Trend</div>
+        <div style={{display:"flex",alignItems:"flex-end",gap:4,height:100}}>
+          {readings.slice(0,30).reverse().map((r,i)=>{
+            const h=Math.max((r.electricityKwh/180)*100,4);
+            const col=r.electricityKwh>155?"#E53935":r.electricityKwh>145?"#FB8C00":"#1976D2";
+            return(<div key={i} title={`${r.date}: ${r.electricityKwh} kWh`} style={{flex:1,background:col,borderRadius:"2px 2px 0 0",height:`${h}%`,minHeight:4,cursor:"help"}}/>);
+          })}
+        </div>
+        <div style={{display:"flex",justifyContent:"space-between",fontSize:9,color:C.textL,marginTop:4}}><span>30 days ago</span><span>Today</span></div>
+        <div style={{display:"flex",gap:12,marginTop:8,flexWrap:"wrap"}}>
+          {[["Normal (≤145)","#1976D2"],["Caution (146–155)","#FB8C00"],["High (>155)","#E53935"]].map(([l,c])=>(<div key={l} style={{display:"flex",alignItems:"center",gap:4,fontSize:10,color:C.textL}}><div style={{width:10,height:10,borderRadius:2,background:c}}/>{l}</div>))}
+        </div>
+      </Card>
+    </div>);
+  };
+
+  const SolarTab=()=>{
+    const totalSolar=readings.reduce((s,r)=>s+(r.solarKwh||0),0);
+    const totalGrid=readings.reduce((s,r)=>s+r.electricityKwh,0);
+    const solarOffsetPct=totalGrid+totalSolar>0?Math.round((totalSolar/(totalGrid+totalSolar))*100):0;
+    const avgSolar=readings.length?Math.round(totalSolar/readings.length):0;
+    const peakSolar=Math.max(...readings.map(r=>r.solarKwh||0));
+    const kwhRate=30;const savedKsh=Math.round(totalSolar*kwhRate);
+    return(<div>
+      <div style={{background:`linear-gradient(135deg,#F57F17,#FF9800)`,borderRadius:16,padding:"18px 22px",marginBottom:14,color:"white"}}>
+        <div style={{fontSize:11,opacity:0.7,letterSpacing:2,textTransform:"uppercase",marginBottom:4}}>Solar Performance — Lodwar, Turkana</div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12}}>
+          {[["Total Generated",`${totalSolar} kWh`],["Solar Offset",`${solarOffsetPct}%`],["Est. Savings",`KSh ${savedKsh.toLocaleString()}`]].map(([l,v])=>(<div key={l}><div style={{fontSize:24,fontWeight:900}}>{v}</div><div style={{fontSize:10,opacity:0.75,marginTop:2}}>{l}</div></div>))}
+        </div>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12,marginBottom:14}}>
+        {[{icon:"☀️",label:"Avg Solar/Day",val:`${avgSolar} kWh`,color:"#F57F17",bg:"#FFF8E1"},{icon:"🏆",label:"Peak Day",val:`${peakSolar} kWh`,color:C.gold,bg:"#FFF8E1"},{icon:"🌱",label:"Peak Sun Hours",val:"6 hrs/day",color:C.sageD,bg:"#E8F5E9"}].map(s=>(<div key={s.label} style={{background:s.bg,borderRadius:14,padding:16,border:`1px solid ${C.border}`}}><div style={{fontSize:26,marginBottom:5}}>{s.icon}</div><div style={{fontSize:22,fontWeight:900,color:s.color}}>{s.val}</div><div style={{fontSize:11,color:C.textL}}>{s.label}</div></div>))}
+      </div>
+      <Card style={{marginBottom:14}}>
+        <div style={{fontSize:13,fontWeight:800,color:C.navy,marginBottom:12}}>☀️ Solar vs Grid — Daily Comparison</div>
+        <div style={{display:"flex",alignItems:"flex-end",gap:4,height:110}}>
+          {readings.slice(0,14).reverse().map((r,i)=>{
+            const total=(r.electricityKwh+(r.solarKwh||0));const maxH=180;
+            const gridH=Math.max((r.electricityKwh/maxH)*100,3);const solH=Math.max(((r.solarKwh||0)/maxH)*100,2);
+            return(<div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:0}}>
+              <div title={`Solar: ${r.solarKwh||0} kWh`} style={{width:"100%",height:`${solH}%`,background:"#FF9800",borderRadius:"3px 3px 0 0"}}/>
+              <div title={`Grid: ${r.electricityKwh} kWh`} style={{width:"100%",height:`${gridH}%`,background:"#1565C0"}}/>
+              <div style={{fontSize:7,color:C.textL,marginTop:2,transform:"rotate(-45deg)",transformOrigin:"top left",width:18}}>{r.date.slice(5)}</div>
+            </div>);
+          })}
+        </div>
+        <div style={{display:"flex",gap:12,marginTop:16,flexWrap:"wrap"}}>
+          {[["☀️ Solar","#FF9800"],["⚡ Grid","#1565C0"]].map(([l,c])=>(<div key={l} style={{display:"flex",alignItems:"center",gap:5,fontSize:11,color:C.textL}}><div style={{width:14,height:14,borderRadius:3,background:c}}/>{l}</div>))}
+        </div>
+      </Card>
+      <Card>
+        <div style={{fontSize:13,fontWeight:800,color:C.navy,marginBottom:12}}>📊 Solar Offset Progress</div>
+        <div style={{marginBottom:6,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div style={{fontSize:12,color:C.textM}}>Target: 30% solar offset</div>
+          <div style={{fontSize:14,fontWeight:900,color:solarOffsetPct>=30?C.sageD:C.warning}}>{solarOffsetPct}%</div>
+        </div>
+        <div style={{background:C.border,borderRadius:8,height:14,overflow:"hidden"}}><div style={{width:`${Math.min(solarOffsetPct,100)}%`,height:"100%",background:solarOffsetPct>=30?C.sageD:"#FF9800",borderRadius:8,transition:"width 0.5s"}}/></div>
+        <div style={{marginTop:10,fontSize:12,color:C.textL,fontStyle:"italic"}}>"The earth is the Lord's, and everything in it." — Psalm 24:1 ✟ · Lodwar averages 6 peak sun hours daily</div>
+      </Card>
+    </div>);
+  };
+
+  return(<div>
+    <SectionTitle title="Water & Power" sub="Daily stewardship of borehole, electricity and solar"/>
+    {alerts.length>0&&(<div style={{marginBottom:14,display:"flex",flexDirection:"column",gap:8}}>
+      {alerts.map((a,i)=>(<div key={i} style={{padding:"10px 16px",background:a.level==="red"?"#FFEBEE":"#FFF8E1",border:`1px solid ${a.level==="red"?"#EF9A9A":"#FFE082"}`,borderRadius:10,display:"flex",alignItems:"center",gap:10}}>
+        <span style={{fontSize:18}}>{a.icon}</span>
+        <div style={{flex:1,fontSize:13,fontWeight:700,color:a.level==="red"?C.danger:C.warning}}>{a.msg}</div>
+        <span style={{fontSize:10,fontWeight:800,padding:"2px 8px",borderRadius:8,background:a.level==="red"?C.danger:C.warning,color:"white"}}>{a.level==="red"?"CRITICAL":"CAUTION"}</span>
+      </div>))}
+    </div>)}
+    <SubTabs tabs={TABS} active={sub} setActive={setSub}/>
+    {sub==="daily"&&<DailyTab/>}
+    {sub==="monthly"&&<MonthlyTab/>}
+    {sub==="solar"&&<SolarTab/>}
   </div>);
 };
 
@@ -3875,6 +4209,7 @@ export default function App(){
   const[user,setUser]=useState(null);const[view,setView]=useState("dashboard");const[devotion,setDevotion]=useState(null);const[showDev,setShowDev]=useState(false);const[col,setCol]=useState(false);
   // Core state
   const[villas,setVillas]=useState(INITIAL_VILLAS);const[bookings,setBookings]=useState(INITIAL_BOOKINGS);const[maintenance,setMaintenance]=useState(INITIAL_MAINTENANCE);
+  const[assets,setAssets]=useState(INITIAL_ASSETS);const[schedule,setSchedule]=useState(PREVENTIVE_SCHEDULE);
   const[housekeeping,setHousekeeping]=useState(INITIAL_HOUSEKEEPING);const[waterPower,setWaterPower]=useState(INITIAL_WATER);const[financials,setFinancials]=useState(INITIAL_FINANCIALS);
   const[staff,setStaff]=useState(INITIAL_STAFF);const[payroll,setPayroll]=useState(INITIAL_PAYROLL);const[advances,setAdvances]=useState(INITIAL_ADVANCES);
   const[leaves,setLeaves]=useState(INITIAL_LEAVES);const[leaveBalances]=useState(INITIAL_LEAVE_BAL);const[shifts,setShifts]=useState(INITIAL_SHIFTS);
@@ -3920,7 +4255,7 @@ export default function App(){
         {view==="bookings"    &&<BookingsView bookings={bookings} setBookings={setBookings} villas={villas} setVillas={setVillas} role={user} logActivity={logActivity}/>}
         {view==="housekeeping"&&<HousekeepingView tasks={housekeeping} setTasks={setHousekeeping}/>}
         {view==="laundry"     &&<LaundryView laundry={laundry} setLaundry={setLaundry}/>}
-        {view==="maintenance" &&<MaintenanceView logs={maintenance} setLogs={setMaintenance}/>}
+        {view==="maintenance" &&<MaintenanceView logs={maintenance} setLogs={setMaintenance} assets={assets} setAssets={setAssets} schedule={schedule} setSchedule={setSchedule}/>}
         {view==="waterpower"  &&<WaterPowerView readings={waterPower} setReadings={setWaterPower}/>}
         {view==="financials"  &&<FinancialsView financials={financials} setFinancials={setFinancials} restaurantOrders={restaurantOrders} pettyCash={pettyCash} setPettyCash={setPettyCash} payroll={payroll} staff={staff}/>}
         {view==="stewardship" &&<StewardshipView readings={waterPower} financials={financials} restaurantOrders={restaurantOrders}/>}
