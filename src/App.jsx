@@ -506,7 +506,7 @@ const LoginScreen=({onLogin})=>{
     <div style={{width:"100%",maxWidth:640,position:"relative",zIndex:1}}>
       {/* Logo */}
       <div style={{textAlign:"center",marginBottom:22}}>
-        <img src="/logo.png" alt="CHABBS Logo" style={{width:130,height:130,objectFit:"contain",filter:"drop-shadow(0 2px 8px rgba(0,0,0,0.5))",marginBottom:6}}/>
+        <img src="./logo.png" alt="CHABBS Logo" style={{width:130,height:130,objectFit:"contain",filter:"drop-shadow(0 2px 8px rgba(0,0,0,0.5))",marginBottom:6}}/>
         <div style={{color:"rgba(255,255,255,0.45)",fontSize:11,letterSpacing:3,textTransform:"uppercase",marginTop:2}}>Lodwar · Turkana County · Kenya</div>
       </div>
       {/* Login card */}
@@ -4204,29 +4204,63 @@ const NightAuditView=({villas,bookings,financials,maintenance,staff,waterPower,r
   </div>);
 };
 
+// ─── PERSISTENCE ──────────────────────────────────────────────
+const STORAGE_KEY='chabbs_v2';
+const loadSaved=(key,def)=>{try{const s=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');return s[key]??def;}catch{return def;}};
+
 // ─── ROOT APP ─────────────────────────────────────────────────
 export default function App(){
   const[user,setUser]=useState(null);const[view,setView]=useState("dashboard");const[devotion,setDevotion]=useState(null);const[showDev,setShowDev]=useState(false);const[col,setCol]=useState(false);
-  // Core state
-  const[villas,setVillas]=useState(INITIAL_VILLAS);const[bookings,setBookings]=useState(INITIAL_BOOKINGS);const[maintenance,setMaintenance]=useState(INITIAL_MAINTENANCE);
-  const[assets,setAssets]=useState(INITIAL_ASSETS);const[schedule,setSchedule]=useState(PREVENTIVE_SCHEDULE);
-  const[housekeeping,setHousekeeping]=useState(INITIAL_HOUSEKEEPING);const[waterPower,setWaterPower]=useState(INITIAL_WATER);const[financials,setFinancials]=useState(INITIAL_FINANCIALS);
-  const[staff,setStaff]=useState(INITIAL_STAFF);const[payroll,setPayroll]=useState(INITIAL_PAYROLL);const[advances,setAdvances]=useState(INITIAL_ADVANCES);
-  const[leaves,setLeaves]=useState(INITIAL_LEAVES);const[leaveBalances]=useState(INITIAL_LEAVE_BAL);const[shifts,setShifts]=useState(INITIAL_SHIFTS);
-  const[performance]=useState(INITIAL_PERFORMANCE);const[training,setTraining]=useState(INITIAL_TRAINING);const[pettyCash,setPettyCash]=useState(INITIAL_PETTY_CASH);const[surveys,setSurveys]=useState(INITIAL_SURVEYS);const[inventory,setInventory]=useState(INITIAL_INVENTORY);const[purchaseOrders,setPurchaseOrders]=useState(INITIAL_POS);const[suppliers]=useState(INITIAL_SUPPLIERS);const[feedback,setFeedback]=useState(INITIAL_FEEDBACK);const[lostFound,setLostFound]=useState(INITIAL_LOSTFOUND);
-  const[restaurantOrders,setRestaurantOrders]=useState(INITIAL_RESTAURANT_ORDERS);const[menu,setMenu]=useState(INITIAL_MENU);
-  // New module state
-  const[leads,setLeads]=useState(INITIAL_LEADS);const[packages,setPackages]=useState(INITIAL_PACKAGES);const[marketingTasks,setMarketingTasks]=useState(INITIAL_MARKETING_TASKS);
-  const[socialPosts,setSocialPosts]=useState(INITIAL_SOCIAL_POSTS);const[emailCampaigns,setEmailCampaigns]=useState(INITIAL_EMAIL_CAMPAIGNS);const[guestCRM,setGuestCRM]=useState(INITIAL_GUEST_CRM);const[socialInbox,setSocialInbox]=useState(INITIAL_SOCIAL_INBOX);
-  const[gardenZones,setGardenZones]=useState(INITIAL_GARDEN_ZONES);const[gardenTasks,setGardenTasks]=useState(INITIAL_GARDEN_TASKS);const[plants,setPlants]=useState(INITIAL_PLANTS);
-  const[events,setEvents]=useState(INITIAL_EVENTS);
-  const[laundry,setLaundry]=useState(INITIAL_LAUNDRY);
-  const[poolChemistry,setPoolChemistry]=useState(INITIAL_POOL_CHEMISTRY);const[poolActivities,setPoolActivities]=useState(INITIAL_POOL_ACTIVITIES);const[poolMaintenance,setPoolMaintenance]=useState(INITIAL_POOL_MAINTENANCE);
-  // Settings state
-  const[settings,setSettings]=useState({name:"CHABBS",tagline:"Resort & Conference Centre",location:"Lodwar · Turkana County · Kenya",currency:"KSh",motto:"Commit your work to the Lord",crossSymbol:"✟",theme:"Turkana Earth",enabledModules:null,roles:null,villaConfig:null});
-  // Activity Log
-  const[activityLog,setActivityLog]=useState([{id:1,timestamp:"2026-03-18T08:00:00",user:"System",action:"System Started",details:"CHABBS Resort Management System initialised",module:"system"},{id:2,timestamp:"2026-03-18T07:45:00",user:"Grace Akello",action:"Villa Status Changed",details:"Villa 8 → Cleaning",module:"villas"},{id:3,timestamp:"2026-03-18T07:30:00",user:"Daniel Ekwang",action:"Booking Created",details:"Johnson Family — Villa 2 (2026-03-16→2026-03-20)",module:"bookings"},{id:4,timestamp:"2026-03-18T07:15:00",user:"Chef Emmanuel",action:"Order Placed",details:"Table 3: Grilled Tilapia ×2, Kenyan Chai ×2 — KSh 2,100",module:"restaurant"}]);
+  // Core state — initialised from localStorage if available, otherwise seed data
+  const[villas,setVillas]=useState(()=>loadSaved('villas',INITIAL_VILLAS));
+  const[bookings,setBookings]=useState(()=>loadSaved('bookings',INITIAL_BOOKINGS));
+  const[maintenance,setMaintenance]=useState(()=>loadSaved('maintenance',INITIAL_MAINTENANCE));
+  const[assets,setAssets]=useState(()=>loadSaved('assets',INITIAL_ASSETS));
+  const[schedule,setSchedule]=useState(()=>loadSaved('schedule',PREVENTIVE_SCHEDULE));
+  const[housekeeping,setHousekeeping]=useState(()=>loadSaved('housekeeping',INITIAL_HOUSEKEEPING));
+  const[waterPower,setWaterPower]=useState(()=>loadSaved('waterPower',INITIAL_WATER));
+  const[financials,setFinancials]=useState(()=>loadSaved('financials',INITIAL_FINANCIALS));
+  const[staff,setStaff]=useState(()=>loadSaved('staff',INITIAL_STAFF));
+  const[payroll,setPayroll]=useState(()=>loadSaved('payroll',INITIAL_PAYROLL));
+  const[advances,setAdvances]=useState(()=>loadSaved('advances',INITIAL_ADVANCES));
+  const[leaves,setLeaves]=useState(()=>loadSaved('leaves',INITIAL_LEAVES));
+  const[leaveBalances]=useState(INITIAL_LEAVE_BAL);
+  const[shifts,setShifts]=useState(()=>loadSaved('shifts',INITIAL_SHIFTS));
+  const[performance]=useState(INITIAL_PERFORMANCE);
+  const[training,setTraining]=useState(()=>loadSaved('training',INITIAL_TRAINING));
+  const[pettyCash,setPettyCash]=useState(()=>loadSaved('pettyCash',INITIAL_PETTY_CASH));
+  const[surveys,setSurveys]=useState(()=>loadSaved('surveys',INITIAL_SURVEYS));
+  const[inventory,setInventory]=useState(()=>loadSaved('inventory',INITIAL_INVENTORY));
+  const[purchaseOrders,setPurchaseOrders]=useState(()=>loadSaved('purchaseOrders',INITIAL_POS));
+  const[suppliers]=useState(INITIAL_SUPPLIERS);
+  const[feedback,setFeedback]=useState(()=>loadSaved('feedback',INITIAL_FEEDBACK));
+  const[lostFound,setLostFound]=useState(()=>loadSaved('lostFound',INITIAL_LOSTFOUND));
+  const[restaurantOrders,setRestaurantOrders]=useState(()=>loadSaved('restaurantOrders',INITIAL_RESTAURANT_ORDERS));
+  const[menu,setMenu]=useState(()=>loadSaved('menu',INITIAL_MENU));
+  const[leads,setLeads]=useState(()=>loadSaved('leads',INITIAL_LEADS));
+  const[packages,setPackages]=useState(()=>loadSaved('packages',INITIAL_PACKAGES));
+  const[marketingTasks,setMarketingTasks]=useState(()=>loadSaved('marketingTasks',INITIAL_MARKETING_TASKS));
+  const[socialPosts,setSocialPosts]=useState(()=>loadSaved('socialPosts',INITIAL_SOCIAL_POSTS));
+  const[emailCampaigns,setEmailCampaigns]=useState(()=>loadSaved('emailCampaigns',INITIAL_EMAIL_CAMPAIGNS));
+  const[guestCRM,setGuestCRM]=useState(()=>loadSaved('guestCRM',INITIAL_GUEST_CRM));
+  const[socialInbox,setSocialInbox]=useState(()=>loadSaved('socialInbox',INITIAL_SOCIAL_INBOX));
+  const[gardenZones,setGardenZones]=useState(()=>loadSaved('gardenZones',INITIAL_GARDEN_ZONES));
+  const[gardenTasks,setGardenTasks]=useState(()=>loadSaved('gardenTasks',INITIAL_GARDEN_TASKS));
+  const[plants,setPlants]=useState(()=>loadSaved('plants',INITIAL_PLANTS));
+  const[events,setEvents]=useState(()=>loadSaved('events',INITIAL_EVENTS));
+  const[laundry,setLaundry]=useState(()=>loadSaved('laundry',INITIAL_LAUNDRY));
+  const[poolChemistry,setPoolChemistry]=useState(()=>loadSaved('poolChemistry',INITIAL_POOL_CHEMISTRY));
+  const[poolActivities,setPoolActivities]=useState(()=>loadSaved('poolActivities',INITIAL_POOL_ACTIVITIES));
+  const[poolMaintenance,setPoolMaintenance]=useState(()=>loadSaved('poolMaintenance',INITIAL_POOL_MAINTENANCE));
+  const[settings,setSettings]=useState(()=>loadSaved('settings',{name:"CHABBS",tagline:"Resort & Conference Centre",location:"Lodwar · Turkana County · Kenya",currency:"KSh",motto:"Commit your work to the Lord",crossSymbol:"✟",theme:"Turkana Earth",enabledModules:null,roles:null,villaConfig:null}));
+  const[activityLog,setActivityLog]=useState(()=>loadSaved('activityLog',[{id:1,timestamp:"2026-03-18T08:00:00",user:"System",action:"System Started",details:"CHABBS Resort Management System initialised",module:"system"},{id:2,timestamp:"2026-03-18T07:45:00",user:"Grace Akello",action:"Villa Status Changed",details:"Villa 8 → Cleaning",module:"villas"},{id:3,timestamp:"2026-03-18T07:30:00",user:"Daniel Ekwang",action:"Booking Created",details:"Johnson Family — Villa 2 (2026-03-16→2026-03-20)",module:"bookings"},{id:4,timestamp:"2026-03-18T07:15:00",user:"Chef Emmanuel",action:"Order Placed",details:"Table 3: Grilled Tilapia ×2, Kenyan Chai ×2 — KSh 2,100",module:"restaurant"}]));
   const logActivity=(action,details,module)=>setActivityLog(p=>[{id:Date.now(),timestamp:new Date().toISOString(),user:user?.name||"System",action,details,module},...p].slice(0,200));
+  // Auto-save all mutable state to localStorage (debounced 1.5 s)
+  const _saveTimer=useRef(null);
+  useEffect(()=>{
+    clearTimeout(_saveTimer.current);
+    _saveTimer.current=setTimeout(()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify({villas,bookings,maintenance,assets,schedule,housekeeping,waterPower,financials,staff,payroll,advances,leaves,shifts,training,pettyCash,surveys,inventory,purchaseOrders,feedback,lostFound,restaurantOrders,menu,leads,packages,marketingTasks,socialPosts,emailCampaigns,guestCRM,socialInbox,gardenZones,gardenTasks,plants,events,laundry,poolChemistry,poolActivities,poolMaintenance,settings,activityLog}));}catch{}},1500);
+  });
 
   useEffect(()=>{const s=document.createElement("style");s.textContent=`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap');*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif;}body{background:#FAF6EE;overflow:hidden;}::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:#F4ECD8;}::-webkit-scrollbar-thumb{background:#C9B89A;border-radius:3px;}button,input,select,textarea{font-family:'DM Sans',sans-serif;}`;document.head.appendChild(s);return()=>document.head.removeChild(s);},[]);
 
