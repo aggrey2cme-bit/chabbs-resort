@@ -27,47 +27,47 @@ const VILLA_AMENITIES=[
 const MENU_CATEGORIES=["Breakfast","Lunch","Dinner","Snacks & Sides","Beverages","Desserts"];
 const INITIAL_MENU=[
   // BREAKFAST
-  {id:1, name:"Full English Breakfast",cat:"Breakfast",price:650,desc:"Eggs, sausage, bacon, beans, toast, grilled tomato",available:true,emoji:"🍳",prep:15},
-  {id:2, name:"Mandazi & Chai",cat:"Breakfast",price:200,desc:"Fresh mandazi with Kenyan spiced chai tea",available:true,emoji:"☕",prep:8},
-  {id:3, name:"Fruit Salad Bowl",cat:"Breakfast",price:350,desc:"Fresh tropical fruits with honey drizzle",available:true,emoji:"🍓",prep:10},
-  {id:4, name:"Omelette (3 eggs)",cat:"Breakfast",price:420,desc:"Choice of: plain, cheese, vegetable or chicken",available:true,emoji:"🥚",prep:12},
-  {id:5, name:"Pancakes & Syrup",cat:"Breakfast",price:380,desc:"Fluffy pancakes with maple syrup & butter",available:true,emoji:"🥞",prep:12},
-  {id:6, name:"Uji wa Wimbi",cat:"Breakfast",price:180,desc:"Traditional finger millet porridge",available:true,emoji:"🥣",prep:5},
+  {id:1, name:"Full English Breakfast",cat:"Breakfast",price:650,costPrice:250,desc:"Eggs, sausage, bacon, beans, toast, grilled tomato",available:true,emoji:"🍳",prep:15},
+  {id:2, name:"Mandazi & Chai",cat:"Breakfast",price:200,costPrice:50,desc:"Fresh mandazi with Kenyan spiced chai tea",available:true,emoji:"☕",prep:8},
+  {id:3, name:"Fruit Salad Bowl",cat:"Breakfast",price:350,costPrice:100,desc:"Fresh tropical fruits with honey drizzle",available:true,emoji:"🍓",prep:10},
+  {id:4, name:"Omelette (3 eggs)",cat:"Breakfast",price:420,costPrice:160,desc:"Choice of: plain, cheese, vegetable or chicken",available:true,emoji:"🥚",prep:12},
+  {id:5, name:"Pancakes & Syrup",cat:"Breakfast",price:380,costPrice:120,desc:"Fluffy pancakes with maple syrup & butter",available:true,emoji:"🥞",prep:12},
+  {id:6, name:"Uji wa Wimbi",cat:"Breakfast",price:180,costPrice:40,desc:"Traditional finger millet porridge",available:true,emoji:"🥣",prep:5},
   // LUNCH
-  {id:7, name:"Grilled Tilapia",cat:"Lunch",price:900,desc:"Whole tilapia, grilled or fried, ugali & kachumbari",available:true,emoji:"🐟",prep:25},
-  {id:8, name:"Beef Stew & Ugali",cat:"Lunch",price:650,desc:"Slow-cooked Turkana beef stew with fresh ugali",available:true,emoji:"🍲",prep:15},
-  {id:9, name:"Chicken Biryani",cat:"Lunch",price:750,desc:"Fragrant basmati rice with spiced chicken",available:true,emoji:"🍛",prep:20},
-  {id:10,name:"Club Sandwich",cat:"Lunch",price:550,desc:"Chicken, bacon, lettuce, tomato, on toasted bread",available:true,emoji:"🥪",prep:15},
-  {id:11,name:"Vegetable Pilau",cat:"Lunch",price:480,desc:"Spiced rice with seasonal vegetables",available:true,emoji:"🫘",prep:20},
-  {id:12,name:"Caesar Salad",cat:"Lunch",price:420,desc:"Romaine, parmesan, croutons, Caesar dressing",available:true,emoji:"🥗",prep:10},
+  {id:7, name:"Grilled Tilapia",cat:"Lunch",price:900,costPrice:320,desc:"Whole tilapia, grilled or fried, ugali & kachumbari",available:true,emoji:"🐟",prep:25},
+  {id:8, name:"Beef Stew & Ugali",cat:"Lunch",price:650,costPrice:240,desc:"Slow-cooked Turkana beef stew with fresh ugali",available:true,emoji:"🍲",prep:15},
+  {id:9, name:"Chicken Biryani",cat:"Lunch",price:750,costPrice:280,desc:"Fragrant basmati rice with spiced chicken",available:true,emoji:"🍛",prep:20},
+  {id:10,name:"Club Sandwich",cat:"Lunch",price:550,costPrice:190,desc:"Chicken, bacon, lettuce, tomato, on toasted bread",available:true,emoji:"🥪",prep:15},
+  {id:11,name:"Vegetable Pilau",cat:"Lunch",price:480,costPrice:150,desc:"Spiced rice with seasonal vegetables",available:true,emoji:"🫘",prep:20},
+  {id:12,name:"Caesar Salad",cat:"Lunch",price:420,costPrice:130,desc:"Romaine, parmesan, croutons, Caesar dressing",available:true,emoji:"🥗",prep:10},
   // DINNER
-  {id:13,name:"Nyama Choma Platter",cat:"Dinner",price:1800,desc:"Premium goat/beef, roasted over charcoal. Serves 2–3",available:true,emoji:"🥩",prep:45},
-  {id:14,name:"Grilled Chicken Half",cat:"Dinner",price:900,desc:"Marinated half chicken, chips or ugali, coleslaw",available:true,emoji:"🍗",prep:30},
-  {id:15,name:"Pasta Arrabiata",cat:"Dinner",price:650,desc:"Penne in spicy tomato sauce, garlic bread",available:true,emoji:"🍝",prep:20},
-  {id:16,name:"T-Bone Steak 300g",cat:"Dinner",price:2200,desc:"Premium beef, mushroom sauce, mashed potato, veg",available:true,emoji:"🥩",prep:35},
-  {id:17,name:"Camel Meat Stew",cat:"Dinner",price:1200,desc:"Turkana specialty — slow-cooked camel, chapati",available:true,emoji:"🍲",prep:40},
-  {id:18,name:"Fish & Chips",cat:"Dinner",price:780,desc:"Battered tilapia fillet, fries, tartar sauce",available:true,emoji:"🐟",prep:20},
+  {id:13,name:"Nyama Choma Platter",cat:"Dinner",price:1800,costPrice:750,desc:"Premium goat/beef, roasted over charcoal. Serves 2–3",available:true,emoji:"🥩",prep:45},
+  {id:14,name:"Grilled Chicken Half",cat:"Dinner",price:900,costPrice:320,desc:"Marinated half chicken, chips or ugali, coleslaw",available:true,emoji:"🍗",prep:30},
+  {id:15,name:"Pasta Arrabiata",cat:"Dinner",price:650,costPrice:200,desc:"Penne in spicy tomato sauce, garlic bread",available:true,emoji:"🍝",prep:20},
+  {id:16,name:"T-Bone Steak 300g",cat:"Dinner",price:2200,costPrice:900,desc:"Premium beef, mushroom sauce, mashed potato, veg",available:true,emoji:"🥩",prep:35},
+  {id:17,name:"Camel Meat Stew",cat:"Dinner",price:1200,costPrice:500,desc:"Turkana specialty — slow-cooked camel, chapati",available:true,emoji:"🍲",prep:40},
+  {id:18,name:"Fish & Chips",cat:"Dinner",price:780,costPrice:280,desc:"Battered tilapia fillet, fries, tartar sauce",available:true,emoji:"🐟",prep:20},
   // SNACKS
-  {id:19,name:"French Fries",cat:"Snacks & Sides",price:280,desc:"Crispy golden fries with ketchup",available:true,emoji:"🍟",prep:12},
-  {id:20,name:"Chicken Wings (6)",cat:"Snacks & Sides",price:480,desc:"BBQ or peri-peri glazed wings",available:true,emoji:"🍗",prep:20},
-  {id:21,name:"Spring Rolls (4)",cat:"Snacks & Sides",price:320,desc:"Crispy vegetable spring rolls with sweet chili dip",available:true,emoji:"🥢",prep:15},
-  {id:22,name:"Samosas (3)",cat:"Snacks & Sides",price:200,desc:"Beef or vegetable Kenyan samosas",available:true,emoji:"🫓",prep:8},
-  {id:23,name:"Chapati (2)",cat:"Snacks & Sides",price:120,desc:"Fresh hand-rolled chapati",available:true,emoji:"🫓",prep:10},
-  {id:24,name:"Chips Masala",cat:"Snacks & Sides",price:350,desc:"Spiced fries with tomato & chili masala",available:true,emoji:"🌶️",prep:15},
+  {id:19,name:"French Fries",cat:"Snacks & Sides",price:280,costPrice:60,desc:"Crispy golden fries with ketchup",available:true,emoji:"🍟",prep:12},
+  {id:20,name:"Chicken Wings (6)",cat:"Snacks & Sides",price:480,costPrice:180,desc:"BBQ or peri-peri glazed wings",available:true,emoji:"🍗",prep:20},
+  {id:21,name:"Spring Rolls (4)",cat:"Snacks & Sides",price:320,costPrice:90,desc:"Crispy vegetable spring rolls with sweet chili dip",available:true,emoji:"🥢",prep:15},
+  {id:22,name:"Samosas (3)",cat:"Snacks & Sides",price:200,costPrice:55,desc:"Beef or vegetable Kenyan samosas",available:true,emoji:"🫓",prep:8},
+  {id:23,name:"Chapati (2)",cat:"Snacks & Sides",price:120,costPrice:25,desc:"Fresh hand-rolled chapati",available:true,emoji:"🫓",prep:10},
+  {id:24,name:"Chips Masala",cat:"Snacks & Sides",price:350,costPrice:80,desc:"Spiced fries with tomato & chili masala",available:true,emoji:"🌶️",prep:15},
   // BEVERAGES
-  {id:25,name:"Fresh Mango Juice",cat:"Beverages",price:250,desc:"100% fresh pressed mango",available:true,emoji:"🥭",prep:5},
-  {id:26,name:"Passion Fruit Juice",cat:"Beverages",price:250,desc:"Fresh passion fruit, chilled",available:true,emoji:"🍹",prep:5},
-  {id:27,name:"Mineral Water 500ml",cat:"Beverages",price:80,desc:"Chilled bottled water",available:true,emoji:"💧",prep:1},
-  {id:28,name:"Soda (Coke/Fanta/Sprite)",cat:"Beverages",price:120,desc:"330ml can, chilled",available:true,emoji:"🥤",prep:1},
-  {id:29,name:"Kenyan Chai",cat:"Beverages",price:150,desc:"Spiced milk tea, Kenyan style",available:true,emoji:"☕",prep:5},
-  {id:30,name:"Black Coffee",cat:"Beverages",price:180,desc:"Arabica drip coffee, black or with milk",available:true,emoji:"☕",prep:5},
-  {id:31,name:"Avocado Smoothie",cat:"Beverages",price:320,desc:"Blended avocado, milk, honey",available:true,emoji:"🥑",prep:8},
-  {id:32,name:"Watermelon Juice",cat:"Beverages",price:220,desc:"Fresh blended watermelon, no sugar",available:true,emoji:"🍉",prep:5},
+  {id:25,name:"Fresh Mango Juice",cat:"Beverages",price:250,costPrice:80,desc:"100% fresh pressed mango",available:true,emoji:"🥭",prep:5},
+  {id:26,name:"Passion Fruit Juice",cat:"Beverages",price:250,costPrice:80,desc:"Fresh passion fruit, chilled",available:true,emoji:"🍹",prep:5},
+  {id:27,name:"Mineral Water 500ml",cat:"Beverages",price:80,costPrice:30,desc:"Chilled bottled water",available:true,emoji:"💧",prep:1},
+  {id:28,name:"Soda (Coke/Fanta/Sprite)",cat:"Beverages",price:120,costPrice:50,desc:"330ml can, chilled",available:true,emoji:"🥤",prep:1},
+  {id:29,name:"Kenyan Chai",cat:"Beverages",price:150,costPrice:40,desc:"Spiced milk tea, Kenyan style",available:true,emoji:"☕",prep:5},
+  {id:30,name:"Black Coffee",cat:"Beverages",price:180,costPrice:50,desc:"Arabica drip coffee, black or with milk",available:true,emoji:"☕",prep:5},
+  {id:31,name:"Avocado Smoothie",cat:"Beverages",price:320,costPrice:90,desc:"Blended avocado, milk, honey",available:true,emoji:"🥑",prep:8},
+  {id:32,name:"Watermelon Juice",cat:"Beverages",price:220,costPrice:65,desc:"Fresh blended watermelon, no sugar",available:true,emoji:"🍉",prep:5},
   // DESSERTS
-  {id:33,name:"Malva Pudding",cat:"Desserts",price:350,desc:"Warm sponge pudding, vanilla custard",available:true,emoji:"🍮",prep:15},
-  {id:34,name:"Fruit Platter",cat:"Desserts",price:400,desc:"Seasonal tropical fruits",available:true,emoji:"🍍",prep:10},
-  {id:35,name:"Ice Cream (2 scoops)",cat:"Desserts",price:280,desc:"Vanilla, chocolate or strawberry",available:true,emoji:"🍨",prep:5},
-  {id:36,name:"Mandazi & Honey",cat:"Desserts",price:200,desc:"Fresh mandazi with local honey",available:true,emoji:"🍯",prep:8},
+  {id:33,name:"Malva Pudding",cat:"Desserts",price:350,costPrice:120,desc:"Warm sponge pudding, vanilla custard",available:true,emoji:"🍮",prep:15},
+  {id:34,name:"Fruit Platter",cat:"Desserts",price:400,costPrice:120,desc:"Seasonal tropical fruits",available:true,emoji:"🍍",prep:10},
+  {id:35,name:"Ice Cream (2 scoops)",cat:"Desserts",price:280,costPrice:90,desc:"Vanilla, chocolate or strawberry",available:true,emoji:"🍨",prep:5},
+  {id:36,name:"Mandazi & Honey",cat:"Desserts",price:200,costPrice:55,desc:"Fresh mandazi with local honey",available:true,emoji:"🍯",prep:8},
 ];
 
 const INITIAL_RESTAURANT_ORDERS=[
@@ -716,11 +716,13 @@ const BookingCalendar=({bookings,villas})=>{
 // ═══════════════════════════════════════════════════════════════
 // ─── RESTAURANT VIEW ──────────────────────────────────────────
 // ═══════════════════════════════════════════════════════════════
-const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
-  const[sub,setSub]=useState(role?.id==="kitchen"?"kitchen":"pos");
-  const isKitchen=role?.id==="kitchen"||role?.id==="admin";
+const RestaurantView=({orders,setOrders,menu,setMenu,villas,role,specials=[],setSpecials})=>{
+  const[sub,setSub]=useState(role?.id==="kitchen"?"kds":"pos");
+  const isAdmin=role?.id==="admin";
   const TABS=[
     ["pos","🛒","New Order"],
+    ["tablemap","🗺","Table Map"],
+    ["kds","📺","KDS"],
     ["kitchen","👨‍🍳","Kitchen Queue"],
     ["sales","💰","Sales & Reports"],
     ["menu","📋","Menu Management"],
@@ -735,7 +737,10 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
     const[server,setServer]=useState("Daniel Ekwang");
     const[notes,setNotes]=useState("");
     const[payMethod,setPayMethod]=useState("Cash");
+    const[tip,setTip]=useState(0);
     const[showSuccess,setShowSuccess]=useState(false);
+    const[showSpecialsMgr,setShowSpecialsMgr]=useState(false);
+    const[specialForm,setSpecialForm]=useState({menuItemId:"",specialPrice:"",notes:""});
 
     const TABLES=["Table 1","Table 2","Table 3","Table 4","Table 5","Table 6","Table 7","Table 8","Table 9","Table 10","Bar Seat 1","Bar Seat 2","Bar Seat 3","Bar Seat 4"];
     const ROOM_SERVICE_OPTS=villas.filter(v=>v.status==="Occupied").map(v=>`${v.name} – Room Service`);
@@ -743,6 +748,7 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
 
     const catItems=menu.filter(m=>m.cat===selCat&&m.available);
     const cartTotal=cart.reduce((s,i)=>s+i.price*i.qty,0);
+    const grandTotal=cartTotal+tip;
 
     const addToCart=item=>{
       setCart(p=>{const ex=p.find(c=>c.menuId===item.id);if(ex)return p.map(c=>c.menuId===item.id?{...c,qty:c.qty+1}:c);return[...p,{menuId:item.id,name:item.name,price:item.price,qty:1,emoji:item.emoji,prep:item.prep}];});
@@ -752,10 +758,18 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
 
     const placeOrder=()=>{
       if(cart.length===0)return;
-      const newOrder={id:Date.now(),table:tableNo,type:orderType,server,items:cart.map(c=>({menuId:c.menuId,name:c.name,qty:c.qty,price:c.price})),total:cartTotal,status:"Pending",orderedAt:new Date().toISOString(),servedAt:null,paid:payMethod!=="Room Charge",payMethod,notes};
+      const newOrder={id:Date.now(),table:tableNo,type:orderType,server,items:cart.map(c=>({menuId:c.menuId,name:c.name,qty:c.qty,price:c.price})),total:cartTotal,tip,status:"Pending",orderedAt:new Date().toISOString(),servedAt:null,paid:payMethod!=="Room Charge",payMethod,notes};
       setOrders(p=>[newOrder,...p]);
-      setCart([]);setNotes("");setShowSuccess(true);setTimeout(()=>setShowSuccess(false),3000);
+      setCart([]);setNotes("");setTip(0);setShowSuccess(true);setTimeout(()=>setShowSuccess(false),3000);
     };
+
+    const addSpecial=()=>{
+      if(!specialForm.menuItemId)return;
+      if(specials.length>=3){alert("Maximum 3 daily specials");return;}
+      setSpecials(p=>[...p,{id:Date.now(),menuItemId:parseInt(specialForm.menuItemId),specialPrice:specialForm.specialPrice?parseInt(specialForm.specialPrice):null,notes:specialForm.notes}]);
+      setSpecialForm({menuItemId:"",specialPrice:"",notes:""});
+    };
+    const removeSpecial=(id)=>setSpecials(p=>p.filter(s=>s.id!==id));
 
     const CAT_COLORS={"Breakfast":"#FF9800","Lunch":"#2E7D32","Dinner":"#1565C0","Snacks & Sides":"#E65100","Beverages":"#00796B","Desserts":"#AD1457"};
 
@@ -788,6 +802,38 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
           </div>
         </Card>
 
+        {/* Daily Specials panel */}
+        <div style={{flexShrink:0}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:specials.length>0||showSpecialsMgr?8:0}}>
+            {specials.length>0&&<div style={{fontSize:12,fontWeight:800,color:"#E65100"}}>⭐ TODAY'S SPECIALS ({specials.length}/3)</div>}
+            {isAdmin&&<button onClick={()=>setShowSpecialsMgr(p=>!p)} style={{fontSize:11,padding:"4px 10px",borderRadius:8,border:`1px solid ${C.border}`,background:"white",color:C.textM,cursor:"pointer",marginLeft:"auto"}}>{showSpecialsMgr?"✕ Close":"⭐ Manage Specials"}</button>}
+          </div>
+          {specials.length>0&&<div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:8}}>
+            {specials.map(sp=>{const item=menu.find(m=>m.id===sp.menuItemId);if(!item)return null;const prc=sp.specialPrice||item.price;return(<button key={sp.id} onClick={()=>addToCart({...item,price:prc})} style={{background:"linear-gradient(135deg,#FFF8E1,white)",borderRadius:12,padding:"8px 12px",border:"2px solid #FFD54F",cursor:"pointer",textAlign:"left",display:"flex",gap:8,alignItems:"center"}}>
+              <span style={{fontSize:18}}>{item.emoji}</span>
+              <div><div style={{fontSize:12,fontWeight:800,color:C.text}}>⭐ {item.name}</div>
+                {sp.notes&&<div style={{fontSize:10,color:C.textL,fontStyle:"italic"}}>{sp.notes}</div>}
+                <div style={{display:"flex",gap:6,alignItems:"center"}}>
+                  <span style={{fontSize:13,fontWeight:900,color:"#E65100"}}>KSh {prc.toLocaleString()}</span>
+                  {sp.specialPrice&&sp.specialPrice<item.price&&<span style={{fontSize:10,color:C.textL,textDecoration:"line-through"}}>KSh {item.price}</span>}
+                </div>
+              </div>
+            </button>);})}
+          </div>}
+          {showSpecialsMgr&&isAdmin&&(<Card style={{padding:12,border:"2px solid #FFD54F",marginBottom:4}}>
+            <div style={{fontSize:12,fontWeight:800,color:"#E65100",marginBottom:10}}>Manage Daily Specials (max 3)</div>
+            <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 2fr auto",gap:8,marginBottom:10,alignItems:"end"}}>
+              <Field label="Menu Item"><select value={specialForm.menuItemId} onChange={e=>setSpecialForm(p=>({...p,menuItemId:e.target.value}))} style={{...inp,fontSize:12}}>
+                <option value="">Choose item…</option>{menu.filter(m=>m.available).map(m=><option key={m.id} value={m.id}>{m.emoji} {m.name}</option>)}
+              </select></Field>
+              <Field label="Special Price"><input type="number" value={specialForm.specialPrice} onChange={e=>setSpecialForm(p=>({...p,specialPrice:e.target.value}))} placeholder="Leave blank = same" style={{...inp,fontSize:12}}/></Field>
+              <Field label="Note (Chef's note etc.)"><input value={specialForm.notes} onChange={e=>setSpecialForm(p=>({...p,notes:e.target.value}))} placeholder="Chef's recommendation…" style={{...inp,fontSize:12}}/></Field>
+              <button onClick={addSpecial} disabled={specials.length>=3} style={{padding:"9px 14px",borderRadius:10,border:"none",background:specials.length>=3?C.border:"#E65100",color:"white",cursor:specials.length>=3?"not-allowed":"pointer",fontWeight:700,fontSize:12,alignSelf:"flex-end"}}>+ Add</button>
+            </div>
+            {specials.map(sp=>{const item=menu.find(m=>m.id===sp.menuItemId);return item?(<div key={sp.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"6px 10px",background:"#FFF8E1",borderRadius:8,marginBottom:4,fontSize:12}}><span>⭐ {item.emoji} {item.name}{sp.specialPrice?` — KSh ${sp.specialPrice}`:""}{sp.notes?` · "${sp.notes}"`:""}</span><button onClick={()=>removeSpecial(sp.id)} style={{padding:"3px 8px",borderRadius:6,border:"none",background:C.danger,color:"white",fontSize:11,cursor:"pointer"}}>Remove</button></div>):null;})}
+          </Card>)}
+        </div>
+
         {/* Category tabs */}
         <div style={{display:"flex",gap:6,overflowX:"auto",paddingBottom:4,flexShrink:0}}>
           {MENU_CATEGORIES.map(cat=>(<button key={cat} onClick={()=>setSelCat(cat)} style={{padding:"8px 16px",borderRadius:20,border:`2px solid ${selCat===cat?CAT_COLORS[cat]:C.border}`,background:selCat===cat?CAT_COLORS[cat]:"white",color:selCat===cat?"white":C.textM,fontSize:12,cursor:"pointer",fontWeight:700,whiteSpace:"nowrap"}}>{cat}</button>))}
@@ -797,13 +843,20 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(160px,1fr))",gap:10,overflowY:"auto",flex:1,paddingRight:4}}>
           {catItems.map(item=>{
             const inCart=cart.find(c=>c.menuId===item.id);
-            return(<button key={item.id} onClick={()=>addToCart(item)} style={{background:inCart?"#E8F5E9":"white",borderRadius:14,padding:"12px 10px",border:`2px solid ${inCart?C.sageD:C.border}`,cursor:"pointer",textAlign:"left",transition:"all 0.15s",position:"relative"}}>
+            const isSpecial=specials.some(s=>s.menuItemId===item.id);
+            const spInfo=specials.find(s=>s.menuItemId===item.id);
+            const dispPrice=isSpecial&&spInfo?.specialPrice?spInfo.specialPrice:item.price;
+            return(<button key={item.id} onClick={()=>addToCart({...item,price:dispPrice})} style={{background:inCart?"#E8F5E9":isSpecial?"#FFFDE7":"white",borderRadius:14,padding:"12px 10px",border:`2px solid ${inCart?C.sageD:isSpecial?"#FFD54F":C.border}`,cursor:"pointer",textAlign:"left",transition:"all 0.15s",position:"relative"}}>
               {inCart&&<div style={{position:"absolute",top:8,right:8,background:C.sageD,color:"white",borderRadius:"50%",width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800}}>{inCart.qty}</div>}
+              {isSpecial&&!inCart&&<div style={{position:"absolute",top:8,right:8,fontSize:14}}>⭐</div>}
               <div style={{fontSize:26,marginBottom:6}}>{item.emoji}</div>
               <div style={{fontSize:12,fontWeight:800,color:C.text,marginBottom:3,lineHeight:1.3}}>{item.name}</div>
               <div style={{fontSize:10,color:C.textL,marginBottom:6,lineHeight:1.4}}>{item.desc.split(",")[0]}</div>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                <div style={{fontSize:14,fontWeight:900,color:C.sageD}}>KSh {item.price}</div>
+                <div>
+                  <div style={{fontSize:14,fontWeight:900,color:isSpecial?"#E65100":C.sageD}}>KSh {dispPrice.toLocaleString()}</div>
+                  {isSpecial&&spInfo?.specialPrice&&spInfo.specialPrice<item.price&&<div style={{fontSize:10,color:C.textL,textDecoration:"line-through"}}>KSh {item.price}</div>}
+                </div>
                 <div style={{fontSize:10,color:C.textL}}>⏱ {item.prep}m</div>
               </div>
             </button>);
@@ -846,20 +899,30 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
           </div>
 
           {/* Notes */}
-          {cart.length>0&&<div style={{padding:"0 16px 12px"}}>
-            <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Special instructions, allergies..." style={{...inp,padding:"8px 12px",fontSize:12,resize:"none",height:52}}/>
+          {cart.length>0&&<div style={{padding:"0 16px 8px"}}>
+            <textarea value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Special instructions, allergies..." style={{...inp,padding:"8px 12px",fontSize:12,resize:"none",height:44}}/>
+          </div>}
+
+          {/* Tip */}
+          {cart.length>0&&<div style={{padding:"0 16px 10px"}}>
+            <div style={{display:"flex",alignItems:"center",gap:8}}>
+              <label style={{fontSize:11,color:C.textL,fontWeight:700,whiteSpace:"nowrap"}}>💰 Tip (KSh):</label>
+              <input type="number" value={tip||""} onChange={e=>setTip(parseInt(e.target.value)||0)} min="0" placeholder="0" style={{...inp,width:80,padding:"6px 10px",fontSize:13}}/>
+              {[100,200,500].map(t=>(<button key={t} onClick={()=>setTip(p=>p+t)} style={{padding:"5px 9px",borderRadius:8,border:`1px solid ${C.border}`,background:"white",fontSize:11,cursor:"pointer",color:C.textM}}>+{t}</button>))}
+            </div>
           </div>}
 
           {/* Total & Actions */}
-          <div style={{padding:"14px 16px",borderTop:`2px solid ${C.border}`,background:C.sandL,borderRadius:"0 0 16px 16px"}}>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
+          <div style={{padding:"12px 16px",borderTop:`2px solid ${C.border}`,background:C.sandL,borderRadius:"0 0 16px 16px"}}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
               <div>
-                <div style={{fontSize:11,color:C.textL,fontWeight:700,textTransform:"uppercase"}}>Order Total</div>
-                <div style={{fontSize:28,fontWeight:900,color:C.navy}}>KSh {cartTotal.toLocaleString()}</div>
+                <div style={{fontSize:11,color:C.textL,fontWeight:700,textTransform:"uppercase"}}>Grand Total</div>
+                <div style={{fontSize:26,fontWeight:900,color:C.navy}}>KSh {grandTotal.toLocaleString()}</div>
+                {tip>0&&<div style={{fontSize:11,color:C.textL}}>Food: KSh {cartTotal.toLocaleString()} + Tip: KSh {tip.toLocaleString()}</div>}
               </div>
               <div style={{fontSize:11,color:C.textL,textAlign:"right"}}>
                 <div>{cart.length} item{cart.length!==1?"s":""}</div>
-                <div>~{Math.max(...cart.map(i=>i.prep||0))} min prep</div>
+                <div>~{Math.max(...cart.map(i=>i.prep||0),0)} min prep</div>
               </div>
             </div>
             {showSuccess&&<div style={{background:"#E8F5E9",border:"1px solid #81C784",borderRadius:10,padding:"10px 14px",marginBottom:10,textAlign:"center",fontSize:13,fontWeight:700,color:C.sageD}}>✅ Order sent to kitchen!</div>}
@@ -874,6 +937,113 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
   };
 
   // ── KITCHEN QUEUE ──────────────────────────────────────────
+  // ── TABLE MAP ──────────────────────────────────────────────
+  const TableMapTab=()=>{
+    const[overrides,setOverrides]=useState({});
+    const[selTable,setSelTable]=useState(null);
+    const TBL_DEF=[
+      {id:"T1",name:"Table 1",seats:4},{id:"T2",name:"Table 2",seats:4},{id:"T3",name:"Table 3",seats:4},{id:"T4",name:"Table 4",seats:4},
+      {id:"T5",name:"Table 5",seats:4},{id:"T6",name:"Table 6",seats:4},{id:"T7",name:"Table 7",seats:4},{id:"T8",name:"Table 8",seats:4},
+      {id:"T9",name:"Table 9",seats:6},{id:"T10",name:"Table 10",seats:6},
+      {id:"B1",name:"Bar Seat 1",seats:1,bar:true},{id:"B2",name:"Bar Seat 2",seats:1,bar:true},
+      {id:"B3",name:"Bar Seat 3",seats:1,bar:true},{id:"B4",name:"Bar Seat 4",seats:1,bar:true},
+    ];
+    const NAME_MAP=Object.fromEntries(TBL_DEF.map(t=>[t.id,t.name]));
+    const activeOrds=orders.filter(o=>["Pending","Preparing","Ready"].includes(o.status));
+    const getOrd=(tid)=>activeOrds.find(o=>o.table===NAME_MAP[tid]);
+    const getStatus=(tid)=>{if(overrides[tid]&&overrides[tid]!=="Available")return overrides[tid];if(getOrd(tid))return "Occupied";return overrides[tid]||"Available";};
+    const elapsed=(t)=>{const m=Math.floor((Date.now()-new Date(t).getTime())/60000);return m<1?"now":`${m}m`;};
+    const S_COLOR={Available:"#2E7D32",Occupied:"#1565C0",Reserved:"#E65100",Cleaning:"#616161"};
+    const S_BG={Available:"#E8F5E9",Occupied:"#E3F2FD",Reserved:"#FFF3E0",Cleaning:"#F5F5F5"};
+    const cnt=(s)=>TBL_DEF.filter(t=>getStatus(t.id)===s).length;
+    const setOvr=(id,st)=>setOverrides(p=>({...p,[id]:st}));
+    const selOrd=selTable?getOrd(selTable):null;
+    return(<div>
+      <div style={{display:"flex",gap:12,marginBottom:16,flexWrap:"wrap",alignItems:"center"}}>
+        {["Available","Occupied","Reserved","Cleaning"].map(s=>(<div key={s} style={{display:"flex",alignItems:"center",gap:6,background:S_BG[s],borderRadius:10,padding:"6px 12px",border:`1px solid ${S_COLOR[s]}30`}}>
+          <div style={{width:10,height:10,borderRadius:"50%",background:S_COLOR[s]}}/>
+          <span style={{fontSize:12,fontWeight:700,color:S_COLOR[s]}}>{s}: {cnt(s)}</span>
+        </div>))}
+        <div style={{marginLeft:"auto",fontSize:11,color:C.textL}}>Click table to manage</div>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:10,marginBottom:16}}>
+        {TBL_DEF.map(t=>{
+          const st=getStatus(t.id);const ord=getOrd(t.id);const sel=selTable===t.id;
+          return(<div key={t.id} onClick={()=>setSelTable(sel?null:t.id)} style={{background:sel?S_COLOR[st]:S_BG[st],border:`2px solid ${S_COLOR[st]}`,borderRadius:14,padding:"12px 10px",cursor:"pointer",textAlign:"center",minHeight:90,display:"flex",flexDirection:"column",justifyContent:"space-between",boxShadow:sel?"0 4px 16px rgba(0,0,0,0.2)":"none",transition:"all 0.15s"}}>
+            <div>
+              <div style={{fontSize:t.bar?13:14,fontWeight:800,color:sel?"white":S_COLOR[st]}}>{t.bar?"🍺":"🍽"} {t.name}</div>
+              <div style={{fontSize:10,color:sel?"rgba(255,255,255,0.7)":C.textL}}>{t.seats} {t.seats===1?"seat":"seats"}</div>
+            </div>
+            {ord?(<div style={{marginTop:6}}>
+              <div style={{fontSize:12,fontWeight:900,color:sel?"white":"#1565C0"}}>KSh {ord.total.toLocaleString()}</div>
+              <div style={{fontSize:10,color:sel?"rgba(255,255,255,0.7)":C.textL}}>{elapsed(ord.orderedAt)} · {ord.status}</div>
+            </div>):(<div style={{fontSize:11,fontWeight:700,color:sel?"rgba(255,255,255,0.8)":S_COLOR[st],marginTop:6}}>● {st}</div>)}
+          </div>);
+        })}
+      </div>
+      {selTable&&(<Card style={{border:`2px solid ${S_COLOR[getStatus(selTable)]}`}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
+          <div><div style={{fontSize:15,fontWeight:800,color:C.navy}}>{NAME_MAP[selTable]}</div><Badge label={getStatus(selTable)}/></div>
+          {getStatus(selTable)!=="Occupied"&&(<div style={{display:"flex",gap:8}}>
+            {["Available","Reserved","Cleaning"].map(s=>(<button key={s} onClick={()=>setOvr(selTable,s)} style={{padding:"6px 12px",borderRadius:8,border:`1px solid ${S_COLOR[s]}`,background:getStatus(selTable)===s?S_COLOR[s]:"white",color:getStatus(selTable)===s?"white":S_COLOR[s],fontSize:11,cursor:"pointer",fontWeight:700}}>{s}</button>))}
+          </div>)}
+        </div>
+        {selOrd?(<div>
+          <div style={{fontSize:13,fontWeight:800,color:C.navy,marginBottom:8}}>Active Order #{selOrd.id.toString().slice(-4)} · {selOrd.server}</div>
+          {selOrd.items.map((item,i)=>(<div key={i} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:`1px solid ${C.border}`,fontSize:13}}><span>{item.qty}× {item.name}</span><span style={{fontWeight:700}}>KSh {(item.price*item.qty).toLocaleString()}</span></div>))}
+          <div style={{display:"flex",justifyContent:"space-between",marginTop:10,paddingTop:8,borderTop:`2px solid ${C.border}`}}><span style={{fontWeight:800}}>Total</span><span style={{fontSize:16,fontWeight:900,color:C.navy}}>KSh {selOrd.total.toLocaleString()}</span></div>
+          <div style={{marginTop:6,fontSize:11,color:C.textL}}>{elapsed(selOrd.orderedAt)} elapsed · <Badge label={selOrd.status}/></div>
+        </div>):(<div style={{textAlign:"center",padding:"20px",color:C.textL}}><div style={{fontSize:32}}>🪑</div><div style={{fontSize:13,fontWeight:600,marginTop:6}}>Table is {getStatus(selTable).toLowerCase()}</div></div>)}
+      </Card>)}
+    </div>);
+  };
+
+  // ── KDS — KITCHEN DISPLAY SYSTEM ───────────────────────────
+  const KDSTab=()=>{
+    const[flash,setFlash]=useState(false);
+    const prevCount=useRef(0);
+    const kdOrds=orders.filter(o=>["Pending","Preparing"].includes(o.status)).sort((a,b)=>new Date(a.orderedAt)-new Date(b.orderedAt));
+    useEffect(()=>{if(kdOrds.length>prevCount.current){setFlash(true);setTimeout(()=>setFlash(false),800);}prevCount.current=kdOrds.length;},[kdOrds.length]);
+    const advance=(id)=>{setOrders(p=>p.map(o=>o.id!==id?o:{...o,status:o.status==="Pending"?"Preparing":"Ready"}));};
+    const elMins=(t)=>Math.floor((Date.now()-new Date(t).getTime())/60000);
+    const S_COLOR={Pending:"#E65100",Preparing:"#1565C0"};
+    const S_LABEL={Pending:"▶ START COOKING",Preparing:"✓ MARK READY"};
+    return(<div style={{background:flash?"#FFF3E0":"transparent",borderRadius:16,transition:"background 0.4s"}}>
+      <div style={{display:"flex",gap:12,marginBottom:20,flexWrap:"wrap",alignItems:"center"}}>
+        <div style={{fontSize:15,fontWeight:900,color:C.navy}}>📺 Kitchen Display System</div>
+        <div style={{marginLeft:"auto",display:"flex",gap:10}}>
+          {[["🟠",orders.filter(o=>o.status==="Pending").length,"Pending"],["🔵",orders.filter(o=>o.status==="Preparing").length,"Preparing"]].map(([emoji,n,label])=>(<div key={label} style={{background:"white",border:`1px solid ${C.border}`,borderRadius:10,padding:"6px 14px",fontSize:13,fontWeight:700,color:C.navy}}>{emoji} {n} {label}</div>))}
+        </div>
+      </div>
+      {kdOrds.length===0&&(<div style={{textAlign:"center",padding:"80px 20px",background:"white",borderRadius:20,border:`2px solid ${C.border}`}}>
+        <div style={{fontSize:60,marginBottom:16}}>✅</div>
+        <div style={{fontSize:24,fontWeight:900,color:C.sageD}}>Kitchen Clear!</div>
+        <div style={{fontSize:14,color:C.textL,marginTop:8}}>No pending orders right now</div>
+      </div>)}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(300px,1fr))",gap:16}}>
+        {kdOrds.map(o=>{
+          const mins=elMins(o.orderedAt);const isLate=mins>=20;
+          const sc=isLate?"#C62828":S_COLOR[o.status];
+          return(<div key={o.id} style={{background:"white",borderRadius:20,overflow:"hidden",boxShadow:"0 4px 20px rgba(0,0,0,0.12)",border:`3px solid ${sc}`}}>
+            <div style={{background:sc,padding:"14px 20px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <div><div style={{fontSize:20,fontWeight:900,color:"white"}}>{o.table}</div><div style={{fontSize:13,color:"rgba(255,255,255,0.85)"}}>{o.type} · {o.server}</div></div>
+              <div style={{textAlign:"right"}}><div style={{fontSize:30,fontWeight:900,color:"white"}}>{mins}m</div><div style={{fontSize:11,color:"rgba(255,255,255,0.7)"}}>{isLate?"⚠️ RUNNING LATE":"elapsed"}</div></div>
+            </div>
+            <div style={{padding:"16px 20px"}}>
+              {o.items.map((item,i)=>(<div key={i} style={{display:"flex",padding:"9px 0",borderBottom:i<o.items.length-1?`1px solid ${C.border}`:"none"}}>
+                <span style={{fontSize:17,fontWeight:800,color:C.text}}>×{item.qty} {item.name}</span>
+              </div>))}
+              {o.notes&&<div style={{marginTop:10,padding:"10px 14px",background:"#FFF9C4",borderRadius:10,fontSize:14,fontWeight:700,color:"#E65100"}}>📝 {o.notes}</div>}
+            </div>
+            <div style={{padding:"0 20px 16px"}}>
+              <button onClick={()=>advance(o.id)} style={{width:"100%",padding:"15px",borderRadius:14,border:"none",background:isLate?"#C62828":sc,color:"white",fontSize:16,fontWeight:900,cursor:"pointer",letterSpacing:0.5}}>{S_LABEL[o.status]}</button>
+            </div>
+          </div>);
+        })}
+      </div>
+    </div>);
+  };
+
   const KitchenTab=()=>{
     const advance=(id)=>{
       setOrders(p=>p.map(o=>{
@@ -958,7 +1128,6 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
     const today="2026-03-18";
     const todayOrders=orders.filter(o=>o.orderedAt?.startsWith(today)&&o.status!=="Cancelled");
     const todayRev=todayOrders.reduce((s,o)=>s+o.total,0);
-    const paidRev=todayOrders.filter(o=>o.paid).reduce((s,o)=>s+o.total,0);
     const pendingRev=todayOrders.filter(o=>!o.paid&&o.status!=="Cancelled").reduce((s,o)=>s+o.total,0);
     const avgOrder=todayOrders.length?Math.round(todayRev/todayOrders.length):0;
 
@@ -976,12 +1145,32 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
     const typeRev={};
     orders.filter(o=>o.status!=="Cancelled").forEach(o=>{if(!typeRev[o.type])typeRev[o.type]={count:0,rev:0};typeRev[o.type].count++;typeRev[o.type].rev+=o.total;});
 
+    // Tips
+    const tipOrders=orders.filter(o=>o.tip>0);
+    const totalTips=tipOrders.reduce((s,o)=>s+(o.tip||0),0);
+    const todayTips=todayOrders.reduce((s,o)=>s+(o.tip||0),0);
+    const tipsByServer={};tipOrders.forEach(o=>{if(!tipsByServer[o.server])tipsByServer[o.server]=0;tipsByServer[o.server]+=o.tip;});
+    const dineInOrds=orders.filter(o=>o.type==="Dine In"&&o.tip>0);
+    const rsOrds=orders.filter(o=>o.type==="Room Service"&&o.tip>0);
+    const avgTipPct=(arr)=>arr.length?Math.round(arr.reduce((s,o)=>s+(o.tip/o.total)*100,0)/arr.length):0;
+
+    // Profitability
+    const profitItems=menu.filter(m=>m.costPrice).map(m=>{
+      const ords=orders.filter(o=>o.status==="Served").flatMap(o=>o.items.filter(i=>i.menuId===m.id));
+      const rev=ords.reduce((s,i)=>s+i.price*i.qty,0);
+      const cost=ords.reduce((s,i)=>s+m.costPrice*i.qty,0);
+      const margin=rev>0?Math.round((1-cost/rev)*100):Math.round((1-m.costPrice/m.price)*100);
+      return{...m,soldRev:rev,margin};
+    }).sort((a,b)=>a.margin-b.margin);
+    const catCost={};const catRevCost={};
+    orders.filter(o=>o.status==="Served").forEach(o=>o.items.forEach(i=>{const m=menu.find(x=>x.id===i.menuId);if(!m?.costPrice)return;const cat=m.cat;if(!catCost[cat])catCost[cat]=0;if(!catRevCost[cat])catRevCost[cat]=0;catCost[cat]+=m.costPrice*i.qty;catRevCost[cat]+=i.price*i.qty;}));
+
     const CAT_COLORS={"Breakfast":"#FF9800","Lunch":"#2E7D32","Dinner":"#1565C0","Snacks & Sides":"#E65100","Beverages":"#00796B","Desserts":"#AD1457"};
 
     return(<div>
       {/* KPI cards */}
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(165px,1fr))",gap:12,marginBottom:20}}>
-        {[{bg:"#E8F5E9",b:"#81C784",tx:C.sageD,l:"Today Revenue",v:`KSh ${todayRev.toLocaleString()}`},{bg:"#E3F2FD",b:"#90CAF9",tx:C.info,l:"Today Orders",v:todayOrders.length},{bg:"#FFF8E1",b:"#FFE082",tx:C.gold,l:"Avg Order Value",v:`KSh ${avgOrder.toLocaleString()}`},{bg:"#FFF3E0",b:"#FFB74D",tx:C.warning,l:"Pending Payment",v:`KSh ${pendingRev.toLocaleString()}`}].map(s=>(<StatBox key={s.l} {...s} value={s.v} label={s.l}/>))}
+        {[{bg:"#E8F5E9",b:"#81C784",tx:C.sageD,l:"Today Revenue",v:`KSh ${todayRev.toLocaleString()}`},{bg:"#E3F2FD",b:"#90CAF9",tx:C.info,l:"Today Orders",v:todayOrders.length},{bg:"#FFF8E1",b:"#FFE082",tx:C.gold,l:"Avg Order Value",v:`KSh ${avgOrder.toLocaleString()}`},{bg:"#FFF3E0",b:"#FFB74D",tx:C.warning,l:"Pending Payment",v:`KSh ${pendingRev.toLocaleString()}`},{bg:"#F3E5F5",b:"#CE93D8",tx:"#6A1B9A",l:"Total Tips",v:`KSh ${totalTips.toLocaleString()}`}].map(s=>(<StatBox key={s.l} {...s} value={s.v} label={s.l}/>))}
       </div>
 
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,marginBottom:16}}>
@@ -1010,6 +1199,41 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
         </Card>
       </div>
 
+      {/* Tips section */}
+      <Card style={{marginBottom:16}}>
+        <div style={{fontSize:13,fontWeight:800,color:"#6A1B9A",marginBottom:14}}>💰 Tip Tracking</div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))",gap:10,marginBottom:14}}>
+          {[{l:"Tips Today",v:`KSh ${todayTips.toLocaleString()}`},{l:"Tips All Time",v:`KSh ${totalTips.toLocaleString()}`},{l:"Avg Tip % (Dine In)",v:`${avgTipPct(dineInOrds)}%`},{l:"Avg Tip % (Room Svc)",v:`${avgTipPct(rsOrds)}%`}].map(s=>(<div key={s.l} style={{background:"#F3E5F5",borderRadius:12,padding:"10px 14px",border:"1px solid #CE93D840"}}><div style={{fontSize:16,fontWeight:900,color:"#6A1B9A"}}>{s.v}</div><div style={{fontSize:11,color:C.textL}}>{s.l}</div></div>))}
+        </div>
+        {Object.keys(tipsByServer).length>0&&(<div>
+          <div style={{fontSize:12,fontWeight:700,color:C.navy,marginBottom:8}}>Tips by Server</div>
+          {Object.entries(tipsByServer).sort((a,b)=>b[1]-a[1]).map(([sv,amt])=>(<div key={sv} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:`1px solid ${C.border}`,fontSize:13}}><span style={{color:C.text}}>{sv}</span><span style={{fontWeight:800,color:"#6A1B9A"}}>KSh {amt.toLocaleString()}</span></div>))}
+        </div>)}
+        {tipOrders.length===0&&<div style={{textAlign:"center",padding:"16px",color:C.textL,fontSize:13}}>No tips recorded yet. Tips can be added when placing an order.</div>}
+      </Card>
+
+      {/* Profitability */}
+      {profitItems.length>0&&(<Card style={{marginBottom:16}}>
+        <div style={{fontSize:13,fontWeight:800,color:C.navy,marginBottom:6}}>📈 Profitability by Item</div>
+        <div style={{fontSize:11,color:C.textL,marginBottom:14}}>Items with food cost &gt; 50% flagged in red. Sorted by lowest margin first.</div>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:8,marginBottom:14}}>
+          {profitItems.slice(0,12).map(m=>{const low=m.margin<50;return(<div key={m.id} style={{background:low?"#FFF8F8":"#F8FFF8",borderRadius:10,padding:"10px 12px",border:`1px solid ${low?C.danger+"40":C.sageD+"30"}`}}>
+            <div style={{fontSize:12,fontWeight:700,color:C.text,marginBottom:4}}>{m.emoji} {m.name}</div>
+            <div style={{display:"flex",justifyContent:"space-between",fontSize:11}}>
+              <span style={{color:C.textL}}>Cost: KSh {m.costPrice}</span>
+              <span style={{fontWeight:800,color:low?C.danger:C.sageD}}>{m.margin}% margin{low?" ⚠️":""}</span>
+            </div>
+          </div>);})}
+        </div>
+        {Object.keys(catRevCost).length>0&&(<div>
+          <div style={{fontSize:12,fontWeight:700,color:C.navy,marginBottom:8}}>Gross Margin by Category</div>
+          {Object.entries(catRevCost).sort((a,b)=>b[1]-a[1]).map(([cat,rev])=>{const cost=catCost[cat]||0;const m=rev>0?Math.round((1-cost/rev)*100):0;return(<div key={cat} style={{marginBottom:8}}>
+            <div style={{display:"flex",justifyContent:"space-between",fontSize:12,marginBottom:3}}><span style={{fontWeight:700,color:CAT_COLORS[cat]||C.navy}}>{cat}</span><span style={{color:C.textL}}>KSh {(rev-cost).toLocaleString()} gross profit · {m}% margin</span></div>
+            <div style={{background:C.sandL,borderRadius:20,height:8,overflow:"hidden"}}><div style={{height:"100%",width:`${m}%`,background:m<50?C.danger:C.sageD,borderRadius:20}}/></div>
+          </div>);})}
+        </div>)}
+      </Card>)}
+
       {/* Top selling items */}
       <Card style={{marginBottom:16}}>
         <div style={{fontSize:13,fontWeight:800,color:C.navy,marginBottom:14}}>🏆 Top Selling Items</div>
@@ -1035,15 +1259,16 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
           <div style={{fontSize:13,fontWeight:800,color:C.navy}}>📋 All Orders Log</div>
           <span style={{fontSize:12,color:C.textL}}>{orders.length} total orders</span>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 0.8fr 0.8fr 1fr",gap:8,padding:"9px 18px",background:`${C.navy}07`,borderBottom:`1px solid ${C.border}`}}>
-          {["Table / Location","Type","Items","Total","Method","Status"].map(h=>(<div key={h} style={{fontSize:10,fontWeight:800,color:C.textL,textTransform:"uppercase",letterSpacing:1}}>{h}</div>))}
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 0.7fr 0.7fr 0.6fr 0.8fr",gap:8,padding:"9px 18px",background:`${C.navy}07`,borderBottom:`1px solid ${C.border}`}}>
+          {["Table / Location","Type","Items","Total","Tip","Method","Status"].map(h=>(<div key={h} style={{fontSize:10,fontWeight:800,color:C.textL,textTransform:"uppercase",letterSpacing:1}}>{h}</div>))}
         </div>
         <div style={{maxHeight:360,overflowY:"auto"}}>
-          {orders.map((o,i)=>(<div key={o.id} style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 0.8fr 0.8fr 1fr",gap:8,padding:"11px 18px",borderBottom:`1px solid ${C.border}`,alignItems:"center",background:i%2===0?"white":`${C.sand}40`}}>
+          {orders.map((o,i)=>(<div key={o.id} style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 0.7fr 0.7fr 0.6fr 0.8fr",gap:8,padding:"11px 18px",borderBottom:`1px solid ${C.border}`,alignItems:"center",background:i%2===0?"white":`${C.sand}40`}}>
             <div><div style={{fontSize:12,fontWeight:700,color:C.text}}>{o.table}</div><div style={{fontSize:10,color:C.textL}}>{o.server}</div></div>
             <div style={{fontSize:12,color:C.textM}}>{o.type}</div>
             <div style={{fontSize:11,color:C.textL}}>{o.items.slice(0,2).map(i=>`${i.qty}×${i.name.split(" ")[0]}`).join(", ")}{o.items.length>2&&`+${o.items.length-2}`}</div>
             <div style={{fontSize:13,fontWeight:800,color:C.navy}}>KSh {o.total.toLocaleString()}</div>
+            <div style={{fontSize:12,fontWeight:700,color:o.tip>0?"#6A1B9A":C.textL}}>{o.tip>0?`KSh ${o.tip}`:"—"}</div>
             <div style={{fontSize:11,color:C.textM}}>{o.payMethod||"—"}</div>
             <Badge label={o.status}/>
           </div>))}
@@ -1056,9 +1281,9 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
   const MenuTab=()=>{
     const[selCat,setSelCat]=useState("All");
     const[showForm,setShowForm]=useState(false);
-    const[form,setForm]=useState({name:"",cat:"Breakfast",price:"",desc:"",emoji:"🍽",prep:15,available:true});
+    const[form,setForm]=useState({name:"",cat:"Breakfast",price:"",costPrice:"",desc:"",emoji:"🍽",prep:15,available:true});
 
-    const save=()=>{setMenu(p=>[...p,{id:Date.now(),...form,price:parseInt(form.price)||0,prep:parseInt(form.prep)||15}]);setShowForm(false);setForm({name:"",cat:"Breakfast",price:"",desc:"",emoji:"🍽",prep:15,available:true});};
+    const save=()=>{setMenu(p=>[...p,{id:Date.now(),...form,price:parseInt(form.price)||0,costPrice:parseInt(form.costPrice)||null,prep:parseInt(form.prep)||15}]);setShowForm(false);setForm({name:"",cat:"Breakfast",price:"",costPrice:"",desc:"",emoji:"🍽",prep:15,available:true});};
     const toggle=(id)=>setMenu(p=>p.map(m=>m.id===id?{...m,available:!m.available}:m));
     const filtered=selCat==="All"?menu:menu.filter(m=>m.cat===selCat);
     const CAT_COLORS={"Breakfast":"#FF9800","Lunch":"#2E7D32","Dinner":"#1565C0","Snacks & Sides":"#E65100","Beverages":"#00796B","Desserts":"#AD1457"};
@@ -1078,6 +1303,7 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
           <Field label="Item Name" col="1/-1"><input value={form.name} onChange={e=>setForm(p=>({...p,name:e.target.value}))} style={inp}/></Field>
           <Field label="Category"><select value={form.cat} onChange={e=>setForm(p=>({...p,cat:e.target.value}))} style={inp}>{MENU_CATEGORIES.map(c=><option key={c}>{c}</option>)}</select></Field>
           <Field label="Price (KSh)"><input type="number" value={form.price} onChange={e=>setForm(p=>({...p,price:e.target.value}))} style={inp}/></Field>
+          <Field label="Cost Price (KSh)"><input type="number" value={form.costPrice} onChange={e=>setForm(p=>({...p,costPrice:e.target.value}))} style={inp} placeholder="Ingredient cost"/></Field>
           <Field label="Prep Time (min)"><input type="number" value={form.prep} onChange={e=>setForm(p=>({...p,prep:e.target.value}))} style={inp}/></Field>
           <Field label="Description" col="1/-1"><input value={form.desc} onChange={e=>setForm(p=>({...p,desc:e.target.value}))} style={inp} placeholder="Brief description of the dish..."/></Field>
           <div>
@@ -1104,7 +1330,11 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
                 <div style={{fontSize:10,color:C.textL}}>⏱ {item.prep} min</div>
               </div>
             </div>
-            <div style={{fontSize:12,color:C.textL,marginBottom:10,lineHeight:1.5}}>{item.desc}</div>
+            <div style={{fontSize:12,color:C.textL,marginBottom:8,lineHeight:1.5}}>{item.desc}</div>
+            {item.costPrice&&(()=>{const fc=Math.round((item.costPrice/item.price)*100);const low=fc>50;return(<div style={{display:"flex",gap:8,marginBottom:8,flexWrap:"wrap"}}>
+              <span style={{fontSize:10,padding:"2px 8px",borderRadius:8,background:low?"#FFEBEE":"#E8F5E9",color:low?C.danger:C.sageD,fontWeight:700}}>Cost: KSh {item.costPrice}</span>
+              <span style={{fontSize:10,padding:"2px 8px",borderRadius:8,background:low?"#FFEBEE":"#E8F5E9",color:low?C.danger:C.sageD,fontWeight:700}}>{100-fc}% margin{low?" ⚠️":""}</span>
+            </div>);})()}
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
               <Badge label={item.available?"Available":"Unavailable"}/>
               <button onClick={()=>toggle(item.id)} style={{padding:"5px 14px",borderRadius:20,border:`1px solid ${item.available?C.danger:C.sageD}`,background:"white",color:item.available?C.danger:C.sageD,cursor:"pointer",fontSize:12,fontWeight:700}}>{item.available?"Disable":"Enable"}</button>
@@ -1119,6 +1349,8 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role})=>{
     <SectionTitle title="Restaurant & Kitchen" sub={`CHABBS Dining · ${orders.filter(o=>o.status!=="Cancelled").length} orders · Chef Emmanuel Liru`}/>
     <SubTabs tabs={TABS} active={sub} setActive={setSub}/>
     {sub==="pos"&&<POSTab/>}
+    {sub==="tablemap"&&<TableMapTab/>}
+    {sub==="kds"&&<KDSTab/>}
     {sub==="kitchen"&&<KitchenTab/>}
     {sub==="sales"&&<SalesTab/>}
     {sub==="menu"&&<MenuTab/>}
@@ -4088,7 +4320,7 @@ const SettingsView=({settings,setSettings,devotions,role,activityLog=[]})=>{
     </div>);
   };
 
-  const MODULE_ICONS={bookings:"📅",villas:"🏡",restaurant:"🍽",maintenance:"🔧",villas:"🏡",system:"⚙️",hr:"👥",inventory:"📦",financials:"💰",sales:"🎯",housekeeping:"🧹",laundry:"👕",pool:"🏊",gardening:"🌿",conference:"🎪",waterpower:"💧"};
+  const MODULE_ICONS={bookings:"📅",villas:"🏡",restaurant:"🍽",maintenance:"🔧",system:"⚙️",hr:"👥",inventory:"📦",financials:"💰",sales:"🎯",housekeeping:"🧹",laundry:"👕",pool:"🏊",gardening:"🌿",conference:"🎪",waterpower:"💧"};
   const ActivityLogTab=()=>{
     const[logFilter,setLogFilter]=useState("all");
     const modules=[...new Set(activityLog.map(l=>l.module))];
@@ -4237,6 +4469,7 @@ export default function App(){
   const[lostFound,setLostFound]=useState(()=>loadSaved('lostFound',INITIAL_LOSTFOUND));
   const[restaurantOrders,setRestaurantOrders]=useState(()=>loadSaved('restaurantOrders',INITIAL_RESTAURANT_ORDERS));
   const[menu,setMenu]=useState(()=>loadSaved('menu',INITIAL_MENU));
+  const[specials,setSpecials]=useState(()=>loadSaved('specials',[]));
   const[leads,setLeads]=useState(()=>loadSaved('leads',INITIAL_LEADS));
   const[packages,setPackages]=useState(()=>loadSaved('packages',INITIAL_PACKAGES));
   const[marketingTasks,setMarketingTasks]=useState(()=>loadSaved('marketingTasks',INITIAL_MARKETING_TASKS));
@@ -4259,7 +4492,7 @@ export default function App(){
   const _saveTimer=useRef(null);
   useEffect(()=>{
     clearTimeout(_saveTimer.current);
-    _saveTimer.current=setTimeout(()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify({villas,bookings,maintenance,assets,schedule,housekeeping,waterPower,financials,staff,payroll,advances,leaves,shifts,training,pettyCash,surveys,inventory,purchaseOrders,feedback,lostFound,restaurantOrders,menu,leads,packages,marketingTasks,socialPosts,emailCampaigns,guestCRM,socialInbox,gardenZones,gardenTasks,plants,events,laundry,poolChemistry,poolActivities,poolMaintenance,settings,activityLog}));}catch{}},1500);
+    _saveTimer.current=setTimeout(()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify({villas,bookings,maintenance,assets,schedule,housekeeping,waterPower,financials,staff,payroll,advances,leaves,shifts,training,pettyCash,surveys,inventory,purchaseOrders,feedback,lostFound,restaurantOrders,menu,specials,leads,packages,marketingTasks,socialPosts,emailCampaigns,guestCRM,socialInbox,gardenZones,gardenTasks,plants,events,laundry,poolChemistry,poolActivities,poolMaintenance,settings,activityLog}));}catch{}},1500);
   });
 
   useEffect(()=>{const s=document.createElement("style");s.textContent=`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap');*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif;}body{background:#FAF6EE;overflow:hidden;}::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:#F4ECD8;}::-webkit-scrollbar-thumb{background:#C9B89A;border-radius:3px;}button,input,select,textarea{font-family:'DM Sans',sans-serif;}`;document.head.appendChild(s);return()=>document.head.removeChild(s);},[]);
@@ -4293,7 +4526,7 @@ export default function App(){
         {view==="waterpower"  &&<WaterPowerView readings={waterPower} setReadings={setWaterPower}/>}
         {view==="financials"  &&<FinancialsView financials={financials} setFinancials={setFinancials} restaurantOrders={restaurantOrders} pettyCash={pettyCash} setPettyCash={setPettyCash} payroll={payroll} staff={staff}/>}
         {view==="stewardship" &&<StewardshipView readings={waterPower} financials={financials} restaurantOrders={restaurantOrders}/>}
-        {view==="restaurant"  &&<RestaurantView orders={restaurantOrders} setOrders={setRestaurantOrders} menu={menu} setMenu={setMenu} villas={villas} role={user}/>}
+        {view==="restaurant"  &&<RestaurantView orders={restaurantOrders} setOrders={setRestaurantOrders} menu={menu} setMenu={setMenu} villas={villas} role={user} specials={specials} setSpecials={setSpecials}/>}
         {view==="conference"  &&<ConferenceView events={events} setEvents={setEvents} venues={CONFERENCE_VENUES}/>}
         {view==="sales"       &&<SalesMarketingView leads={leads} setLeads={setLeads} packages={packages} setPackages={setPackages} marketingTasks={marketingTasks} setMarketingTasks={setMarketingTasks} bookings={bookings} villas={villas} role={user} socialPosts={socialPosts} setSocialPosts={setSocialPosts} emailCampaigns={emailCampaigns} setEmailCampaigns={setEmailCampaigns} guestCRM={guestCRM} setGuestCRM={setGuestCRM} socialInbox={socialInbox} setSocialInbox={setSocialInbox}/>}
         {view==="gardening"   &&<GardeningView zones={gardenZones} setZones={setGardenZones} gardenTasks={gardenTasks} setGardenTasks={setGardenTasks} plants={plants} setPlants={setPlants}/>}
