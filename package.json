@@ -11,8 +11,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "electron:dev": "concurrently \"vite --port 3000\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron:build": "vite build && electron-builder --win --x64",
-    "dist": "npm run electron:build"
+    "electron:pack": "vite build && electron-builder --win --x64 --dir",
+    "electron:installer": "makensis installer.nsi",
+    "dist": "npm run electron:pack && npm run electron:installer"
   },
   "dependencies": {
     "react": "^18.3.1",
