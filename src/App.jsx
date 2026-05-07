@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 
+// ─── SHARED UTILITIES ─────────────────────────────────────────
+const exportCSV=(name,headers,rows)=>{
+  const csv=[headers.join(","),...rows.map(r=>r.map(c=>typeof c==="string"&&c.includes(",")?`"${c}"`:c).join(","))].join("\n");
+  const blob=new Blob([csv],{type:"text/csv"});const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download=`CHABBS_${name}_${new Date().toISOString().split("T")[0]}.csv`;a.click();URL.revokeObjectURL(url);
+};
+const todayISO=()=>new Date().toISOString().split("T")[0];
+
 // ─── DEVOTIONS ────────────────────────────────────────────────
 const DEVOTIONS=[
   {verse:"Colossians 3:23",text:"Whatever you do, work heartily, as for the Lord and not for men.",value:"Excellence",message:"Serve every guest as if serving God Himself. Let excellence be your signature today."},
@@ -716,7 +724,7 @@ const BookingCalendar=({bookings,villas})=>{
 // ═══════════════════════════════════════════════════════════════
 // ─── RESTAURANT VIEW ──────────────────────────────────────────
 // ═══════════════════════════════════════════════════════════════
-const RestaurantView=({orders,setOrders,menu,setMenu,villas,role,specials=[],setSpecials})=>{
+const RestaurantView=({orders,setOrders,menu,setMenu,villas,role,specials=[],setSpecials,showToast=()=>{}})=>{
   const[sub,setSub]=useState(role?.id==="kitchen"?"kds":"pos");
   const isAdmin=role?.id==="admin";
   const TABS=[
@@ -765,7 +773,7 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role,specials=[],set
 
     const addSpecial=()=>{
       if(!specialForm.menuItemId)return;
-      if(specials.length>=3){alert("Maximum 3 daily specials");return;}
+      if(specials.length>=3){showToast("Maximum 3 daily specials allowed","warning");return;}
       setSpecials(p=>[...p,{id:Date.now(),menuItemId:parseInt(specialForm.menuItemId),specialPrice:specialForm.specialPrice?parseInt(specialForm.specialPrice):null,notes:specialForm.notes}]);
       setSpecialForm({menuItemId:"",specialPrice:"",notes:""});
     };
@@ -1125,7 +1133,7 @@ const RestaurantView=({orders,setOrders,menu,setMenu,villas,role,specials=[],set
 
   // ── SALES & REPORTS ────────────────────────────────────────
   const SalesTab=()=>{
-    const today="2026-03-18";
+    const today=todayISO();
     const todayOrders=orders.filter(o=>o.orderedAt?.startsWith(today)&&o.status!=="Cancelled");
     const todayRev=todayOrders.reduce((s,o)=>s+o.total,0);
     const pendingRev=todayOrders.filter(o=>!o.paid&&o.status!=="Cancelled").reduce((s,o)=>s+o.total,0);
@@ -1475,9 +1483,9 @@ const Dashboard=({villas,bookings,financials,maintenance,staff,restaurantOrders,
   </div>);
 };
 
-const VillasView=({villas,setVillas,role})=>{
+const VillasView=({villas,setVillas,role,showToast=()=>{}})=>{
   const[sel,setSel]=useState(null);const statuses=["Available","Occupied","Maintenance","Cleaning"];const canEdit=role?.id==="admin"||role?.id==="receptionist";
-  const changeStatus=(id,s)=>{setVillas(p=>p.map(v=>v.id===id?{...v,status:s}:v));if(s==="Cleaning")alert(`🔔 Villa ${id} changed to Cleaning — Housekeeping notified!`);setSel(null);};
+  const changeStatus=(id,s)=>{setVillas(p=>p.map(v=>v.id===id?{...v,status:s}:v));if(s==="Cleaning")showToast(`Villa ${id} → Cleaning — Housekeeping notified 🔔`,"info");setSel(null);};
   return(<div>
     <SectionTitle title="Villa Management" sub="10 luxury 3-bedroom ensuite villas · CHABBS Resort"/>
     <Card style={{marginBottom:14}}>
@@ -2153,7 +2161,6 @@ const HRView=({staff,setStaff,payroll,setPayroll,advances,setAdvances,leaves,set
   const PayReportsTab=()=>{
     const allMonths=[...new Set(payroll.map(p=>p.month))].sort((a,b)=>new Date(b.replace(" ","1 "))-new Date(a.replace(" ","1 ")));
     const[selMonth,setSelMonth]=useState(allMonths[0]||CUR_MONTH);const[selStaff,setSelStaff]=useState("all");const[reportType,setReportType]=useState("monthly");
-    const exportCSV=(name,headers,rows)=>{const csv=[headers.join(","),...rows.map(r=>r.map(c=>typeof c==="string"&&c.includes(",")?`"${c}"`:c).join(","))].join("\n");const blob=new Blob([csv],{type:"text/csv"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`CHABBS_${name}_${new Date().toISOString().split("T")[0]}.csv`;a.click();URL.revokeObjectURL(url);};
     const monthData=payroll.filter(p=>p.month===selMonth);
     const staffHistory=selStaff!=="all"?payroll.filter(p=>p.staffId===parseInt(selStaff)):[];
     const annualSummary=allMonths.slice(0,12).map(m=>{const mp=payroll.filter(p=>p.month===m);return{month:m,gross:mp.reduce((s,p)=>s+p.gross,0),net:mp.reduce((s,p)=>s+p.net,0),deductions:mp.reduce((s,p)=>s+p.deductions,0),count:mp.length};});
@@ -2261,7 +2268,7 @@ const HRView=({staff,setStaff,payroll,setPayroll,advances,setAdvances,leaves,set
 
   const TrainingTab=()=>{
     const[form,setForm]=useState({staffId:"",course:"",completedDate:"",expiryDate:"",certNo:""});const[showForm,setShowForm]=useState(false);
-    const today="2026-04-05";const soon=d=>{if(!d)return false;const diff=(new Date(d)-new Date(today))/(864e5);return diff>=0&&diff<=30;};
+    const today=todayISO();const soon=d=>{if(!d)return false;const diff=(new Date(d)-new Date(today))/(864e5);return diff>=0&&diff<=30;};
     const save=()=>{setTraining(p=>[{id:Date.now(),...form,staffId:parseInt(form.staffId),status:new Date(form.expiryDate)<new Date(today)?"Expired":"Valid"},...p]);setShowForm(false);setForm({staffId:"",course:"",completedDate:"",expiryDate:"",certNo:""});};
     const COURSES=["First Aid & CPR","Food Hygiene & Safety","Fire Safety & Evacuation","Customer Service Excellence","Electrical Safety","Defensive Driving","Health & Safety Induction","Child Safeguarding","Data Protection"];
     const expired=training.filter(t=>t.status==="Expired").length;const expiring=training.filter(t=>soon(t.expiryDate)).length;
@@ -2358,7 +2365,7 @@ const HRView=({staff,setStaff,payroll,setPayroll,advances,setAdvances,leaves,set
   };
 
   const ShiftsTab=()=>{
-    const[date,setDate]=useState("2026-03-18");const todayS=shifts.filter(s=>s.date===date);
+    const[date,setDate]=useState(todayISO);const todayS=shifts.filter(s=>s.date===date);
     const markStatus=(id,st)=>setShifts(prev=>prev.map(s=>s.id===id?{...s,status:st}:s));
     const setOT=(id,hrs)=>setShifts(prev=>prev.map(s=>{if(s.id!==id)return s;const st2=staff.find(st=>st.id===s.staffId);const hourly=(st2?.salary||0)/(30*8);const otPay=Math.round(hourly*1.5*hrs);return{...s,otHours:hrs,otPay,otApproved:hrs>4?false:true};}));
     const approveOT=(id)=>setShifts(prev=>prev.map(s=>s.id===id?{...s,otApproved:true}:s));
@@ -2679,12 +2686,13 @@ const FeedbackView=({feedback,setFeedback})=>{
 
 const LostFoundView=({items,setItems})=>{
   const[showForm,setShowForm]=useState(false);const[form,setForm]=useState({item:"",foundAt:"",foundBy:"",notes:""});
+  const[claimId,setClaimId]=useState(null);const[claimBy,setClaimBy]=useState("");
   const save=()=>{setItems(p=>[{id:Date.now(),...form,foundDate:new Date().toISOString().split("T")[0],status:"In Storage",claimedBy:"",claimDate:""},...p]);setShowForm(false);setForm({item:"",foundAt:"",foundBy:"",notes:""});};
-  const claim=id=>{const by=prompt("Claimed by (name):");if(by)setItems(p=>p.map(i=>i.id===id?{...i,status:"Claimed",claimedBy:by,claimDate:new Date().toISOString().split("T")[0]}:i));};
+  const confirmClaim=()=>{if(!claimBy.trim())return;setItems(p=>p.map(i=>i.id===claimId?{...i,status:"Claimed",claimedBy:claimBy.trim(),claimDate:new Date().toISOString().split("T")[0]}:i));setClaimId(null);setClaimBy("");};
   return(<div><SectionTitle title="Lost & Found" sub={`${items.filter(i=>i.status==="In Storage").length} items in storage`}/>
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16,flexWrap:"wrap",gap:10}}><div style={{display:"flex",gap:10}}>{[["In Storage",items.filter(i=>i.status==="In Storage").length,"#E3F2FD","#1565C0"],["Claimed",items.filter(i=>i.status==="Claimed").length,"#E8F5E9","#2E7D32"]].map(([l,v,bg,tx])=>(<div key={l} style={{background:bg,borderRadius:12,padding:"10px 14px",border:`1px solid ${tx}30`,textAlign:"center"}}><div style={{fontSize:18,fontWeight:900,color:tx}}>{v}</div><div style={{fontSize:11,color:C.textL}}>{l}</div></div>))}</div><button onClick={()=>setShowForm(!showForm)} style={{background:`linear-gradient(135deg,${C.navy},${C.navyM})`,color:"white",padding:"10px 14px",borderRadius:12,border:"none",cursor:"pointer",fontWeight:700,fontSize:13}}>+ Log Found Item</button></div>
     {showForm&&(<Card style={{marginBottom:14,border:`2px solid ${C.navy}`}}><div style={{fontSize:14,fontWeight:800,color:C.navy,marginBottom:12}}>Log Found Item</div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}><Field label="Item Description" col="1/-1"><input value={form.item} onChange={e=>setForm(p=>({...p,item:e.target.value}))} placeholder="Describe item clearly..." style={inp}/></Field><Field label="Found At"><input value={form.foundAt} onChange={e=>setForm(p=>({...p,foundAt:e.target.value}))} style={inp}/></Field><Field label="Found By"><input value={form.foundBy} onChange={e=>setForm(p=>({...p,foundBy:e.target.value}))} style={inp}/></Field><Field label="Notes" col="1/-1"><input value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} style={inp}/></Field></div><div style={{display:"flex",gap:10,marginTop:12}}><button onClick={save} style={{background:C.navy,color:"white",padding:"9px 18px",borderRadius:10,border:"none",cursor:"pointer",fontWeight:700}}>Log</button><button onClick={()=>setShowForm(false)} style={{background:C.border,color:C.textM,padding:"9px 18px",borderRadius:10,border:"none",cursor:"pointer"}}>Cancel</button></div></Card>)}
-    <div style={{display:"flex",flexDirection:"column",gap:10}}>{items.map(item=>(<Card key={item.id} style={{borderLeft:`4px solid ${item.status==="Claimed"?C.sageD:C.info}`}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:12}}><div><div style={{fontSize:14,fontWeight:800,color:C.text,marginBottom:4}}>{item.item}</div><div style={{fontSize:12,color:C.textL,display:"flex",gap:14,flexWrap:"wrap"}}><span>📍 {item.foundAt}</span><span>👤 {item.foundBy}</span><span>📅 {item.foundDate}</span></div>{item.notes&&<div style={{fontSize:12,color:C.textM,marginTop:4,fontStyle:"italic"}}>{item.notes}</div>}{item.status==="Claimed"&&<div style={{fontSize:12,color:C.sageD,marginTop:5,fontWeight:700}}>✅ Claimed by {item.claimedBy} · {item.claimDate}</div>}</div><div style={{display:"flex",flexDirection:"column",gap:8,alignItems:"flex-end"}}><Badge label={item.status}/>{item.status==="In Storage"&&<button onClick={()=>claim(item.id)} style={{padding:"5px 12px",borderRadius:8,background:C.sageD,color:"white",border:"none",cursor:"pointer",fontSize:12,fontWeight:700}}>Mark Claimed</button>}</div></div></Card>))}</div>
+    <div style={{display:"flex",flexDirection:"column",gap:10}}>{items.map(item=>(<Card key={item.id} style={{borderLeft:`4px solid ${item.status==="Claimed"?C.sageD:C.info}`}}><div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:12}}><div><div style={{fontSize:14,fontWeight:800,color:C.text,marginBottom:4}}>{item.item}</div><div style={{fontSize:12,color:C.textL,display:"flex",gap:14,flexWrap:"wrap"}}><span>📍 {item.foundAt}</span><span>👤 {item.foundBy}</span><span>📅 {item.foundDate}</span></div>{item.notes&&<div style={{fontSize:12,color:C.textM,marginTop:4,fontStyle:"italic"}}>{item.notes}</div>}{item.status==="Claimed"&&<div style={{fontSize:12,color:C.sageD,marginTop:5,fontWeight:700}}>✅ Claimed by {item.claimedBy} · {item.claimDate}</div>}</div><div style={{display:"flex",flexDirection:"column",gap:8,alignItems:"flex-end"}}><Badge label={item.status}/>{item.status==="In Storage"&&(claimId===item.id?(<div style={{display:"flex",gap:6,alignItems:"center"}}><input value={claimBy} onChange={e=>setClaimBy(e.target.value)} placeholder="Claimant name…" style={{...inp,padding:"5px 10px",fontSize:12,width:150}} autoFocus/><button onClick={confirmClaim} style={{padding:"5px 10px",borderRadius:8,background:C.sageD,color:"white",border:"none",cursor:"pointer",fontSize:12,fontWeight:700}}>✓</button><button onClick={()=>{setClaimId(null);setClaimBy("");}} style={{padding:"5px 10px",borderRadius:8,background:C.border,color:C.textM,border:"none",cursor:"pointer",fontSize:12}}>✕</button></div>):(<button onClick={()=>{setClaimId(item.id);setClaimBy("");}} style={{padding:"5px 12px",borderRadius:8,background:C.sageD,color:"white",border:"none",cursor:"pointer",fontSize:12,fontWeight:700}}>Mark Claimed</button>))}</div></div></Card>))}</div>
   </div>);
 };
 
@@ -2792,7 +2800,7 @@ const AUTOMATION_WORKFLOWS=[
   {id:8,name:"Loyalty Tier Upgrade",trigger:"Guest reaches spending threshold",steps:["Bronze→Silver at KSh 50k lifetime","Silver→Gold at KSh 150k lifetime","Gold→Platinum at KSh 500k lifetime","Send congratulations email with new perks"],status:"Active",runs:14,icon:"🏆"},
 ];
 
-const SalesMarketingView=({leads,setLeads,packages,setPackages,marketingTasks,setMarketingTasks,bookings,villas,role,socialPosts,setSocialPosts,emailCampaigns,setEmailCampaigns,guestCRM,setGuestCRM,socialInbox,setSocialInbox})=>{
+const SalesMarketingView=({leads,setLeads,packages,setPackages,marketingTasks,setMarketingTasks,bookings,villas,role,socialPosts,setSocialPosts,emailCampaigns,setEmailCampaigns,guestCRM,setGuestCRM,socialInbox,setSocialInbox,settings={}})=>{
   const[sub,setSub]=useState("leads");
   const TABS=[["leads","📊","Leads"],["calendar","📅","Calendar"],["social","📱","Social"],["inbox","📥","Inbox"],["ai","🤖","AI Studio"],["seo","🔍","SEO"],["compete","🏆","Competitors"],["email","📧","Email"],["sms","💬","SMS"],["whatsapp","📲","WhatsApp"],["crm","👥","CRM"],["auto","⚡","Automation"],["reviews","⭐","Reviews"],["qr","🔲","QR Codes"],["revenue","💹","Attribution"],["packages","🎁","Packages"],["analytics","📈","Analytics"],["tasks","✅","Tasks"]];
 
@@ -2860,7 +2868,7 @@ const SalesMarketingView=({leads,setLeads,packages,setPackages,marketingTasks,se
     const TONES=["Warm & Faith-inspired","Professional","Fun & Trendy","Urgent Promo","Storytelling"];
     const modeColor={single:"#7C3AED",bulk:"#1565C0",variants:"#E65100",image:"#2E7D32"};
     const callClaude=async(prompt,maxTok=1500)=>{
-      const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:maxTok,system:"You are the social media manager for CHABBS Resort & Conference Centre in Lodwar, Turkana County, Kenya. Christian-run luxury resort: 10 villas, pool, Chef Emmanuel's famous nyama choma, conference venues, stunning Turkana desert views. Brand voice: warm, faith-inspired, professional yet inviting. Include ✟ or scripture naturally where appropriate.",messages:[{role:"user",content:prompt}]})});
+      const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":settings.claudeApiKey||"","anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:maxTok,system:"You are the social media manager for CHABBS Resort & Conference Centre in Lodwar, Turkana County, Kenya. Christian-run luxury resort: 10 villas, pool, Chef Emmanuel's famous nyama choma, conference venues, stunning Turkana desert views. Brand voice: warm, faith-inspired, professional yet inviting. Include ✟ or scripture naturally where appropriate.",messages:[{role:"user",content:prompt}]})});
       const data=await res.json();
       return data.content?.map(b=>b.text||"").join("\n")||"";
     };
@@ -3224,7 +3232,7 @@ const SalesMarketingView=({leads,setLeads,packages,setPackages,marketingTasks,se
       setGenerating(item.id);
       if(replyingTo!==item.id)setReplyingTo(item.id);
       try{
-        const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:250,system:"You are Martha Auma, Sales & Marketing Manager at CHABBS Resort & Conference Centre, Lodwar, Kenya. Reply warmly and professionally with natural faith-inspired language. Keep replies concise and platform-appropriate. Sign off as 'CHABBS Team' or 'Martha' naturally.",messages:[{role:"user",content:`Write a reply to this ${item.type} on ${item.platform} from ${item.author}:\n\n"${item.content}"\n\nContext — they saw: "${item.postSnippet}"\n\nWarm, helpful, authentic reply. If booking question → invite to contact us. If complaint → acknowledge & offer resolution. If positive → thank warmly with faith touch. Under 100 words. No generic filler.`}]})});
+        const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":settings.claudeApiKey||"","anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:250,system:"You are Martha Auma, Sales & Marketing Manager at CHABBS Resort & Conference Centre, Lodwar, Kenya. Reply warmly and professionally with natural faith-inspired language. Keep replies concise and platform-appropriate. Sign off as 'CHABBS Team' or 'Martha' naturally.",messages:[{role:"user",content:`Write a reply to this ${item.type} on ${item.platform} from ${item.author}:\n\n"${item.content}"\n\nContext — they saw: "${item.postSnippet}"\n\nWarm, helpful, authentic reply. If booking question → invite to contact us. If complaint → acknowledge & offer resolution. If positive → thank warmly with faith touch. Under 100 words. No generic filler.`}]})});
         const data=await res.json();
         const reply=data.content?.map(b=>b.text||"").join("")||`Thank you ${item.author}! 🙏 We'd love to welcome you to CHABBS. Please reach us on +254 722 100 001 or WhatsApp. God bless! ✟ — Martha, CHABBS`;
         setReplyText(p=>({...p,[item.id]:reply}));
@@ -3303,7 +3311,7 @@ const SalesMarketingView=({leads,setLeads,packages,setPackages,marketingTasks,se
       const key=`${platform}-${rev.guest}`;
       setGenerating(key);
       try{
-        const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:200,system:"You are Aggrey Ochieng, General Manager of CHABBS Resort & Conference Centre, Lodwar, Kenya. Write warm, professional, faith-inspired review responses. Be personal and specific. Sign off as 'Aggrey Ochieng, GM — CHABBS Resort ✟'.",messages:[{role:"user",content:`Write a ${platform} review response for this ${rev.rating<=3?"negative/mixed":"positive"} review from ${rev.guest}:\n\n"${rev.text}"\n\nRating: ${rev.rating}/5 (or ${rev.rating}/10 for Booking.com)\n\nIf positive: thank warmly, invite back, mention a specific detail. If mixed/negative: acknowledge, apologise specifically, explain improvement. Under 80 words.`}]})});
+        const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":settings.claudeApiKey||"","anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:200,system:"You are Aggrey Ochieng, General Manager of CHABBS Resort & Conference Centre, Lodwar, Kenya. Write warm, professional, faith-inspired review responses. Be personal and specific. Sign off as 'Aggrey Ochieng, GM — CHABBS Resort ✟'.",messages:[{role:"user",content:`Write a ${platform} review response for this ${rev.rating<=3?"negative/mixed":"positive"} review from ${rev.guest}:\n\n"${rev.text}"\n\nRating: ${rev.rating}/5 (or ${rev.rating}/10 for Booking.com)\n\nIf positive: thank warmly, invite back, mention a specific detail. If mixed/negative: acknowledge, apologise specifically, explain improvement. Under 80 words.`}]})});
         const data=await res.json();
         const response=data.content?.map(b=>b.text||"").join("")||`Dear ${rev.guest}, thank you so much for your review! 🙏 We are blessed to have hosted you at CHABBS and your feedback means the world to us. We hope to welcome you back soon! God bless, Aggrey Ochieng, GM — CHABBS Resort ✟`;
         setAiResponses(p=>({...p,[key]:response}));
@@ -4186,7 +4194,7 @@ const SettingsView=({settings,setSettings,devotions,role,activityLog=[]})=>{
   const[sub,setSub]=useState("identity");
   const isAdmin=role?.id==="admin";
   if(!isAdmin)return(<div style={{textAlign:"center",padding:60}}><div style={{fontSize:40,marginBottom:14}}>🔒</div><div style={{fontSize:16,fontWeight:700,color:C.text}}>Admin Access Required</div><div style={{fontSize:13,color:C.textL,marginTop:6}}>Settings are available to Admin / Manager role only.</div></div>);
-  const TABS=[["identity","🏨","Resort Identity"],["themes","🎨","Theme & Colors"],["modules","📦","Modules"],["roles","🔐","Roles & PINs"],["villas","🏡","Villa Config"],["devotions","✟","Devotions"],["export","📥","Data Export"],["activitylog","📋","Activity Log"]];
+  const TABS=[["identity","🏨","Resort Identity"],["themes","🎨","Theme & Colors"],["modules","📦","Modules"],["roles","🔐","Roles & PINs"],["villas","🏡","Villa Config"],["devotions","✟","Devotions"],["apikeys","🔑","API Keys"],["export","📥","Data Export"],["activitylog","📋","Activity Log"]];
 
   const IdentityTab=()=>{
     const[local,setLocal]=useState({name:settings.name||"CHABBS",tagline:settings.tagline||"Resort & Conference Centre",location:settings.location||"Lodwar · Turkana County · Kenya",currency:settings.currency||"KSh",motto:settings.motto||"Commit your work to the Lord",crossSymbol:settings.crossSymbol||"✟"});
@@ -4293,11 +4301,31 @@ const SettingsView=({settings,setSettings,devotions,role,activityLog=[]})=>{
     </div>
   </div>);
 
+  const APIKeysTab=()=>{
+    const[key,setKey]=useState(settings.claudeApiKey||"");
+    const[show,setShow]=useState(false);
+    const save=()=>setSettings(p=>({...p,claudeApiKey:key}));
+    return(<Card>
+      <div style={{fontSize:14,fontWeight:800,color:C.navy,marginBottom:6}}>🤖 Anthropic Claude API Key</div>
+      <div style={{fontSize:12,color:C.textL,marginBottom:16}}>Required for AI content generation in Sales & Marketing (social posts, review responses, inbox replies). Get your key at console.anthropic.com.</div>
+      <Field label="API Key">
+        <div style={{display:"flex",gap:8}}>
+          <input type={show?"text":"password"} value={key} onChange={e=>setKey(e.target.value)} placeholder="sk-ant-..." style={{...inp,flex:1,fontFamily:"monospace",fontSize:12,letterSpacing:show?0:2}}/>
+          <button onClick={()=>setShow(p=>!p)} style={{padding:"8px 14px",borderRadius:10,border:`1px solid ${C.border}`,background:"white",cursor:"pointer",fontSize:12}}>{show?"🙈":"👁"}</button>
+        </div>
+      </Field>
+      <div style={{display:"flex",gap:10,marginTop:14,alignItems:"center"}}>
+        <button onClick={save} style={{background:C.navy,color:"white",padding:"10px 22px",borderRadius:10,border:"none",cursor:"pointer",fontWeight:700}}>💾 Save API Key</button>
+        {settings.claudeApiKey&&<div style={{fontSize:12,color:C.sageD,fontWeight:700}}>✓ Key saved</div>}
+      </div>
+      <div style={{marginTop:16,padding:"12px 14px",background:`${C.gold}15`,borderRadius:10,border:`1px solid ${C.gold}40`}}>
+        <div style={{fontSize:12,fontWeight:700,color:C.terra,marginBottom:4}}>⚠️ Security Note</div>
+        <div style={{fontSize:11,color:C.textM,lineHeight:1.6}}>API keys are stored in browser localStorage and used directly from the browser. This is suitable for a trusted local/desktop environment like this system, but do not share or expose your key.</div>
+      </div>
+    </Card>);
+  };
+
   const DataExportTab=()=>{
-    const exportCSV=(name,headers,rows)=>{
-      const csv=[headers.join(","),...rows.map(r=>r.map(c=>typeof c==="string"&&c.includes(",")?`"${c}"`:c).join(","))].join("\n");
-      const blob=new Blob([csv],{type:"text/csv"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`CHABBS_${name}_${new Date().toISOString().split("T")[0]}.csv`;a.click();URL.revokeObjectURL(url);
-    };
     const EXPORTS=[
       {name:"Night Audit Report",icon:"🌙",desc:"End-of-day summary with all departments",format:"CSV",action:()=>exportCSV("NightAudit",["Section","Metric","Value"],[["Occupancy","Villas Occupied","3/10"],["Financials","Revenue","12000"],["Financials","Expenses","3200"],["Restaurant","Orders","5"],["Utilities","Tank Level","85%"]])},
       {name:"Financial Ledger",icon:"💰",desc:"Revenue, expenses, and profit by date",format:"CSV",action:()=>exportCSV("Financials",["Date","Revenue","Expenses","Profit","Notes"],[["2026-03-18","12000","3200","8800","Accommodation + Restaurant"],["2026-03-17","15600","4100","11500",""]])},
@@ -4348,7 +4376,7 @@ const SettingsView=({settings,setSettings,devotions,role,activityLog=[]})=>{
       </div>
     </div>);
   };
-  return(<div><SectionTitle title="Settings & Customisation" sub="System configuration — Admin access only"/><SubTabs tabs={TABS} active={sub} setActive={setSub}/>{sub==="identity"&&<IdentityTab/>}{sub==="themes"&&<ThemesTab/>}{sub==="modules"&&<ModulesTab/>}{sub==="roles"&&<RolesTab/>}{sub==="villas"&&<VillasTab/>}{sub==="devotions"&&<DevotionsTab/>}{sub==="export"&&<DataExportTab/>}{sub==="activitylog"&&<ActivityLogTab/>}</div>);
+  return(<div><SectionTitle title="Settings & Customisation" sub="System configuration — Admin access only"/><SubTabs tabs={TABS} active={sub} setActive={setSub}/>{sub==="identity"&&<IdentityTab/>}{sub==="themes"&&<ThemesTab/>}{sub==="modules"&&<ModulesTab/>}{sub==="roles"&&<RolesTab/>}{sub==="villas"&&<VillasTab/>}{sub==="devotions"&&<DevotionsTab/>}{sub==="apikeys"&&<APIKeysTab/>}{sub==="export"&&<DataExportTab/>}{sub==="activitylog"&&<ActivityLogTab/>}</div>);
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -4411,7 +4439,7 @@ const MyHRView=({staff,payroll,advances,leaves,leaveBalances,shifts,role})=>{
 };
 
 const NightAuditView=({villas,bookings,financials,maintenance,staff,waterPower,restaurantOrders,events,laundry,poolChemistry,gardenZones,leads})=>{
-  const today="2026-03-18";const f=financials[0]||{};const w=waterPower[0]||{};const occ=villas.filter(v=>v.status==="Occupied").length;
+  const today=todayISO();const f=financials[0]||{};const w=waterPower[0]||{};const occ=villas.filter(v=>v.status==="Occupied").length;
   const restRev=restaurantOrders.filter(o=>o.orderedAt?.startsWith(today)&&o.status!=="Cancelled").reduce((s,o)=>s+o.total,0);
   const poolLatest=poolChemistry?.[0]||{};const confRev=(events||[]).filter(e=>e.status==="Confirmed").reduce((s,e)=>s+e.total,0);
   const SECTIONS=[
@@ -4443,6 +4471,8 @@ const loadSaved=(key,def)=>{try{const s=JSON.parse(localStorage.getItem(STORAGE_
 // ─── ROOT APP ─────────────────────────────────────────────────
 export default function App(){
   const[user,setUser]=useState(null);const[view,setView]=useState("dashboard");const[devotion,setDevotion]=useState(null);const[showDev,setShowDev]=useState(false);const[col,setCol]=useState(false);
+  const[toast,setToast]=useState(null);
+  const showToast=(msg,type="info")=>{setToast({msg,type});setTimeout(()=>setToast(null),3500);};
   // Core state — initialised from localStorage if available, otherwise seed data
   const[villas,setVillas]=useState(()=>loadSaved('villas',INITIAL_VILLAS));
   const[bookings,setBookings]=useState(()=>loadSaved('bookings',INITIAL_BOOKINGS));
@@ -4456,7 +4486,7 @@ export default function App(){
   const[payroll,setPayroll]=useState(()=>loadSaved('payroll',INITIAL_PAYROLL));
   const[advances,setAdvances]=useState(()=>loadSaved('advances',INITIAL_ADVANCES));
   const[leaves,setLeaves]=useState(()=>loadSaved('leaves',INITIAL_LEAVES));
-  const[leaveBalances]=useState(INITIAL_LEAVE_BAL);
+  const[leaveBalances,setLeaveBalances]=useState(()=>loadSaved('leaveBalances',INITIAL_LEAVE_BAL));
   const[shifts,setShifts]=useState(()=>loadSaved('shifts',INITIAL_SHIFTS));
   const[performance]=useState(INITIAL_PERFORMANCE);
   const[training,setTraining]=useState(()=>loadSaved('training',INITIAL_TRAINING));
@@ -4485,14 +4515,14 @@ export default function App(){
   const[poolChemistry,setPoolChemistry]=useState(()=>loadSaved('poolChemistry',INITIAL_POOL_CHEMISTRY));
   const[poolActivities,setPoolActivities]=useState(()=>loadSaved('poolActivities',INITIAL_POOL_ACTIVITIES));
   const[poolMaintenance,setPoolMaintenance]=useState(()=>loadSaved('poolMaintenance',INITIAL_POOL_MAINTENANCE));
-  const[settings,setSettings]=useState(()=>loadSaved('settings',{name:"CHABBS",tagline:"Resort & Conference Centre",location:"Lodwar · Turkana County · Kenya",currency:"KSh",motto:"Commit your work to the Lord",crossSymbol:"✟",theme:"Turkana Earth",enabledModules:null,roles:null,villaConfig:null}));
+  const[settings,setSettings]=useState(()=>loadSaved('settings',{name:"CHABBS",tagline:"Resort & Conference Centre",location:"Lodwar · Turkana County · Kenya",currency:"KSh",motto:"Commit your work to the Lord",crossSymbol:"✟",theme:"Turkana Earth",enabledModules:null,roles:null,villaConfig:null,claudeApiKey:""}));
   const[activityLog,setActivityLog]=useState(()=>loadSaved('activityLog',[{id:1,timestamp:"2026-03-18T08:00:00",user:"System",action:"System Started",details:"CHABBS Resort Management System initialised",module:"system"},{id:2,timestamp:"2026-03-18T07:45:00",user:"Grace Akello",action:"Villa Status Changed",details:"Villa 8 → Cleaning",module:"villas"},{id:3,timestamp:"2026-03-18T07:30:00",user:"Daniel Ekwang",action:"Booking Created",details:"Johnson Family — Villa 2 (2026-03-16→2026-03-20)",module:"bookings"},{id:4,timestamp:"2026-03-18T07:15:00",user:"Chef Emmanuel",action:"Order Placed",details:"Table 3: Grilled Tilapia ×2, Kenyan Chai ×2 — KSh 2,100",module:"restaurant"}]));
   const logActivity=(action,details,module)=>setActivityLog(p=>[{id:Date.now(),timestamp:new Date().toISOString(),user:user?.name||"System",action,details,module},...p].slice(0,200));
   // Auto-save all mutable state to localStorage (debounced 1.5 s)
   const _saveTimer=useRef(null);
   useEffect(()=>{
     clearTimeout(_saveTimer.current);
-    _saveTimer.current=setTimeout(()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify({villas,bookings,maintenance,assets,schedule,housekeeping,waterPower,financials,staff,payroll,advances,leaves,shifts,training,pettyCash,surveys,inventory,purchaseOrders,feedback,lostFound,restaurantOrders,menu,specials,leads,packages,marketingTasks,socialPosts,emailCampaigns,guestCRM,socialInbox,gardenZones,gardenTasks,plants,events,laundry,poolChemistry,poolActivities,poolMaintenance,settings,activityLog}));}catch{}},1500);
+    _saveTimer.current=setTimeout(()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify({villas,bookings,maintenance,assets,schedule,housekeeping,waterPower,financials:financials.slice(0,365),staff,payroll,advances,leaves,leaveBalances,shifts,training,pettyCash,surveys,inventory,purchaseOrders,feedback,lostFound,restaurantOrders:restaurantOrders.slice(0,500),menu,specials,leads,packages,marketingTasks,socialPosts,emailCampaigns,guestCRM,socialInbox,gardenZones,gardenTasks,plants,events,laundry,poolChemistry,poolActivities,poolMaintenance,settings,activityLog}));}catch{}},1500);
   });
 
   useEffect(()=>{const s=document.createElement("style");s.textContent=`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap');*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif;}body{background:#FAF6EE;overflow:hidden;}::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:#F4ECD8;}::-webkit-scrollbar-thumb{background:#C9B89A;border-radius:3px;}button,input,select,textarea{font-family:'DM Sans',sans-serif;}`;document.head.appendChild(s);return()=>document.head.removeChild(s);},[]);
@@ -4511,14 +4541,14 @@ export default function App(){
   };
 
   return !user?<LoginScreen onLogin={login}/>:(
-    <div style={{display:"flex",height:"100vh",overflow:"hidden",background:"#FAF6EE"}}>
+    <><div style={{display:"flex",height:"100vh",overflow:"hidden",background:"#FAF6EE"}}>
       {showDev&&devotion&&<DevotionPopup devotion={devotion} user={user} onClose={()=>setShowDev(false)}/>}
       <Sidebar view={view} setView={setView} role={user} onLogout={()=>{setUser(null);setView("dashboard");}} col={col} setCol={setCol} alerts={alerts}/>
       <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
         <TopBar user={user} alerts={alerts} setView={setView}/>
         <main style={{flex:1,overflowY:"auto",padding:24,background:"#FAF6EE"}}>
         {view==="dashboard"   &&<Dashboard villas={villas} bookings={bookings} financials={financials} maintenance={maintenance} staff={staff} restaurantOrders={restaurantOrders} gardenZones={gardenZones} poolChemistry={poolChemistry} laundry={laundry} events={events} leads={leads} setView={setView}/>}
-        {view==="villas"      &&<VillasView villas={villas} setVillas={setVillas} role={user}/>}
+        {view==="villas"      &&<VillasView villas={villas} setVillas={setVillas} role={user} showToast={showToast}/>}
         {view==="bookings"    &&<BookingsView bookings={bookings} setBookings={setBookings} villas={villas} setVillas={setVillas} role={user} logActivity={logActivity}/>}
         {view==="housekeeping"&&<HousekeepingView tasks={housekeeping} setTasks={setHousekeeping}/>}
         {view==="laundry"     &&<LaundryView laundry={laundry} setLaundry={setLaundry}/>}
@@ -4526,9 +4556,9 @@ export default function App(){
         {view==="waterpower"  &&<WaterPowerView readings={waterPower} setReadings={setWaterPower}/>}
         {view==="financials"  &&<FinancialsView financials={financials} setFinancials={setFinancials} restaurantOrders={restaurantOrders} pettyCash={pettyCash} setPettyCash={setPettyCash} payroll={payroll} staff={staff}/>}
         {view==="stewardship" &&<StewardshipView readings={waterPower} financials={financials} restaurantOrders={restaurantOrders}/>}
-        {view==="restaurant"  &&<RestaurantView orders={restaurantOrders} setOrders={setRestaurantOrders} menu={menu} setMenu={setMenu} villas={villas} role={user} specials={specials} setSpecials={setSpecials}/>}
+        {view==="restaurant"  &&<RestaurantView orders={restaurantOrders} setOrders={setRestaurantOrders} menu={menu} setMenu={setMenu} villas={villas} role={user} specials={specials} setSpecials={setSpecials} showToast={showToast}/>}
         {view==="conference"  &&<ConferenceView events={events} setEvents={setEvents} venues={CONFERENCE_VENUES}/>}
-        {view==="sales"       &&<SalesMarketingView leads={leads} setLeads={setLeads} packages={packages} setPackages={setPackages} marketingTasks={marketingTasks} setMarketingTasks={setMarketingTasks} bookings={bookings} villas={villas} role={user} socialPosts={socialPosts} setSocialPosts={setSocialPosts} emailCampaigns={emailCampaigns} setEmailCampaigns={setEmailCampaigns} guestCRM={guestCRM} setGuestCRM={setGuestCRM} socialInbox={socialInbox} setSocialInbox={setSocialInbox}/>}
+        {view==="sales"       &&<SalesMarketingView leads={leads} setLeads={setLeads} packages={packages} setPackages={setPackages} marketingTasks={marketingTasks} setMarketingTasks={setMarketingTasks} bookings={bookings} villas={villas} role={user} socialPosts={socialPosts} setSocialPosts={setSocialPosts} emailCampaigns={emailCampaigns} setEmailCampaigns={setEmailCampaigns} guestCRM={guestCRM} setGuestCRM={setGuestCRM} socialInbox={socialInbox} setSocialInbox={setSocialInbox} settings={settings}/>}
         {view==="gardening"   &&<GardeningView zones={gardenZones} setZones={setGardenZones} gardenTasks={gardenTasks} setGardenTasks={setGardenTasks} plants={plants} setPlants={setPlants}/>}
         {view==="pool"        &&<PoolView poolChemistry={poolChemistry} setPoolChemistry={setPoolChemistry} poolActivities={poolActivities} setPoolActivities={setPoolActivities} poolMaintenance={poolMaintenance} setPoolMaintenance={setPoolMaintenance}/>}
         {view==="hr"          &&<HRView staff={staff} setStaff={setStaff} payroll={payroll} setPayroll={setPayroll} advances={advances} setAdvances={setAdvances} leaves={leaves} setLeaves={setLeaves} leaveBalances={leaveBalances} shifts={shifts} setShifts={setShifts} performance={performance} training={training} setTraining={setTraining} surveys={surveys} setSurveys={setSurveys} role={user}/>}
@@ -4541,5 +4571,7 @@ export default function App(){
       </main>
       </div>
     </div>
+    {toast&&(<div style={{position:"fixed",bottom:28,left:"50%",transform:"translateX(-50%)",zIndex:9999,padding:"12px 24px",borderRadius:14,fontWeight:700,fontSize:13,color:"white",background:toast.type==="warning"?"#E65100":toast.type==="success"?"#2E7D32":"#1565C0",boxShadow:"0 6px 24px rgba(0,0,0,0.25)",display:"flex",alignItems:"center",gap:10,minWidth:200,maxWidth:400}}>{toast.type==="warning"?"⚠️":toast.type==="success"?"✅":"ℹ️"} {toast.msg}</div>)}
+    </>
   );
 }
