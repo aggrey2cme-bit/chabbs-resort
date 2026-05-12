@@ -3,9 +3,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  // './' base is required for Electron's file:// protocol — absolute paths ('/foo')
-  // won't resolve when loading from disk; relative paths do.
-  base: './',
+  // '/' base for web deployment. The Electron app uses a separate build process.
+  base: '/',
   server: {
     port: 3000,
     open: true,

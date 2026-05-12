@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { supabase, RESORT_ID } from "./lib/supabase";
 
 // ─── SHARED UTILITIES ─────────────────────────────────────────
 const exportCSV=(name,headers,rows)=>{
@@ -565,7 +566,7 @@ const DevotionPopup=({devotion,user,onClose})=>(<div style={{position:"fixed",in
 </div>);
 
 // ─── TOP BAR ─────────────────────────────────────────────────
-const TopBar=({user,alerts,setView})=>{
+const TopBar=({user,alerts,setView,syncStatus="offline"})=>{
   const[time,setTime]=useState(new Date());const[searchOpen,setSearchOpen]=useState(false);const[searchQ,setSearchQ]=useState("");
   useEffect(()=>{const t=setInterval(()=>setTime(new Date()),30000);return()=>clearInterval(t);},[]);
   const totalAlerts=Object.values(alerts).reduce((s,v)=>s+v,0);
@@ -593,6 +594,8 @@ const TopBar=({user,alerts,setView})=>{
         <span style={{fontSize:20}}>🔔</span>
         {totalAlerts>0&&<div style={{position:"absolute",top:-4,right:-6,background:C.danger,color:"white",fontSize:9,fontWeight:900,borderRadius:10,minWidth:16,height:16,display:"flex",alignItems:"center",justifyContent:"center",padding:"0 4px",border:"2px solid white"}}>{totalAlerts}</div>}
       </div>
+      {/* Sync status */}
+      {({synced:{icon:"☁️",label:"Synced",color:"#2E7D32"},saving:{icon:"⏫",label:"Saving…",color:"#1565C0"},connecting:{icon:"⏳",label:"Connecting…",color:"#E65100"},offline:{icon:"📴",label:"Offline",color:"#B71C1C"}}[syncStatus]||{icon:"📴",label:"Offline",color:"#B71C1C"})&&(<div title={`Sync: ${syncStatus}`} style={{display:"flex",alignItems:"center",gap:4,padding:"4px 10px",borderRadius:20,background:`${({synced:"#2E7D32",saving:"#1565C0",connecting:"#E65100",offline:"#B71C1C"}[syncStatus]||"#B71C1C")}15`,border:`1px solid ${({synced:"#2E7D32",saving:"#1565C0",connecting:"#E65100",offline:"#B71C1C"}[syncStatus]||"#B71C1C")}30`,fontSize:10,fontWeight:700,color:({synced:"#2E7D32",saving:"#1565C0",connecting:"#E65100",offline:"#B71C1C"}[syncStatus]||"#B71C1C")}}><span>{({synced:"☁️",saving:"⏫",connecting:"⏳",offline:"📴"}[syncStatus]||"📴")}</span><span>{({synced:"Synced",saving:"Saving…",connecting:"Connecting…",offline:"Offline"}[syncStatus]||"Offline")}</span></div>)}
       {/* Role badge */}
       <div style={{padding:"5px 12px",borderRadius:20,background:`${C.navy}08`,border:`1px solid ${C.navy}15`,fontSize:11,fontWeight:700,color:C.navy}}>{user?.icon} {user?.label}</div>
     </div>
@@ -4472,6 +4475,7 @@ const loadSaved=(key,def)=>{try{const s=JSON.parse(localStorage.getItem(STORAGE_
 export default function App(){
   const[user,setUser]=useState(null);const[view,setView]=useState("dashboard");const[devotion,setDevotion]=useState(null);const[showDev,setShowDev]=useState(false);const[col,setCol]=useState(false);
   const[toast,setToast]=useState(null);
+  const[syncStatus,setSyncStatus]=useState(supabase?"connecting":"offline");
   const showToast=(msg,type="info")=>{setToast({msg,type});setTimeout(()=>setToast(null),3500);};
   // Core state — initialised from localStorage if available, otherwise seed data
   const[villas,setVillas]=useState(()=>loadSaved('villas',INITIAL_VILLAS));
@@ -4518,11 +4522,81 @@ export default function App(){
   const[settings,setSettings]=useState(()=>loadSaved('settings',{name:"CHABBS",tagline:"Resort & Conference Centre",location:"Lodwar · Turkana County · Kenya",currency:"KSh",motto:"Commit your work to the Lord",crossSymbol:"✟",theme:"Turkana Earth",enabledModules:null,roles:null,villaConfig:null,claudeApiKey:""}));
   const[activityLog,setActivityLog]=useState(()=>loadSaved('activityLog',[{id:1,timestamp:"2026-03-18T08:00:00",user:"System",action:"System Started",details:"CHABBS Resort Management System initialised",module:"system"},{id:2,timestamp:"2026-03-18T07:45:00",user:"Grace Akello",action:"Villa Status Changed",details:"Villa 8 → Cleaning",module:"villas"},{id:3,timestamp:"2026-03-18T07:30:00",user:"Daniel Ekwang",action:"Booking Created",details:"Johnson Family — Villa 2 (2026-03-16→2026-03-20)",module:"bookings"},{id:4,timestamp:"2026-03-18T07:15:00",user:"Chef Emmanuel",action:"Order Placed",details:"Table 3: Grilled Tilapia ×2, Kenyan Chai ×2 — KSh 2,100",module:"restaurant"}]));
   const logActivity=(action,details,module)=>setActivityLog(p=>[{id:Date.now(),timestamp:new Date().toISOString(),user:user?.name||"System",action,details,module},...p].slice(0,200));
-  // Auto-save all mutable state to localStorage (debounced 1.5 s)
+
+  // Build a snapshot of all mutable state
+  const buildSnapshot=()=>({villas,bookings,maintenance,assets,schedule,housekeeping,waterPower,financials:financials.slice(0,365),staff,payroll,advances,leaves,leaveBalances,shifts,training,pettyCash,surveys,inventory,purchaseOrders,feedback,lostFound,restaurantOrders:restaurantOrders.slice(0,500),menu,specials,leads,packages,marketingTasks,socialPosts,emailCampaigns,guestCRM,socialInbox,gardenZones,gardenTasks,plants,events,laundry,poolChemistry,poolActivities,poolMaintenance,settings,activityLog});
+
+  // Apply a state snapshot from Supabase to all local React state
+  const applySnapshot=(d)=>{
+    if(!d)return;
+    if(d.villas)setVillas(d.villas);if(d.bookings)setBookings(d.bookings);
+    if(d.maintenance)setMaintenance(d.maintenance);if(d.assets)setAssets(d.assets);
+    if(d.schedule)setSchedule(d.schedule);if(d.housekeeping)setHousekeeping(d.housekeeping);
+    if(d.waterPower)setWaterPower(d.waterPower);if(d.financials)setFinancials(d.financials);
+    if(d.staff)setStaff(d.staff);if(d.payroll)setPayroll(d.payroll);
+    if(d.advances)setAdvances(d.advances);if(d.leaves)setLeaves(d.leaves);
+    if(d.leaveBalances)setLeaveBalances(d.leaveBalances);if(d.shifts)setShifts(d.shifts);
+    if(d.training)setTraining(d.training);if(d.pettyCash)setPettyCash(d.pettyCash);
+    if(d.surveys)setSurveys(d.surveys);if(d.inventory)setInventory(d.inventory);
+    if(d.purchaseOrders)setPurchaseOrders(d.purchaseOrders);if(d.feedback)setFeedback(d.feedback);
+    if(d.lostFound)setLostFound(d.lostFound);if(d.restaurantOrders)setRestaurantOrders(d.restaurantOrders);
+    if(d.menu)setMenu(d.menu);if(d.specials)setSpecials(d.specials);
+    if(d.leads)setLeads(d.leads);if(d.packages)setPackages(d.packages);
+    if(d.marketingTasks)setMarketingTasks(d.marketingTasks);if(d.socialPosts)setSocialPosts(d.socialPosts);
+    if(d.emailCampaigns)setEmailCampaigns(d.emailCampaigns);if(d.guestCRM)setGuestCRM(d.guestCRM);
+    if(d.socialInbox)setSocialInbox(d.socialInbox);if(d.gardenZones)setGardenZones(d.gardenZones);
+    if(d.gardenTasks)setGardenTasks(d.gardenTasks);if(d.plants)setPlants(d.plants);
+    if(d.events)setEvents(d.events);if(d.laundry)setLaundry(d.laundry);
+    if(d.poolChemistry)setPoolChemistry(d.poolChemistry);if(d.poolActivities)setPoolActivities(d.poolActivities);
+    if(d.poolMaintenance)setPoolMaintenance(d.poolMaintenance);
+    if(d.settings)setSettings(d.settings);if(d.activityLog)setActivityLog(d.activityLog);
+  };
+
+  // On mount: load from Supabase if available, subscribe to real-time updates
+  const _skipNextSync=useRef(false);
+  useEffect(()=>{
+    if(!supabase){setSyncStatus("offline");return;}
+    let channel;
+    (async()=>{
+      const{data,error}=await supabase.from("resort_state").select("state").eq("resort_id",RESORT_ID).single();
+      if(error&&error.code==="PGRST116"){
+        // No row yet — push current localStorage state to Supabase
+        const snap=buildSnapshot();
+        await supabase.from("resort_state").insert({resort_id:RESORT_ID,state:snap});
+        setSyncStatus("synced");
+      } else if(error){
+        setSyncStatus("offline");
+      } else if(data?.state){
+        _skipNextSync.current=true;
+        applySnapshot(data.state);
+        try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data.state));}catch{}
+        setSyncStatus("synced");
+      }
+      // Real-time subscription — another device changed data
+      channel=supabase.channel("resort_state_changes").on("postgres_changes",{event:"UPDATE",schema:"public",table:"resort_state",filter:`resort_id=eq.${RESORT_ID}`},(payload)=>{
+        _skipNextSync.current=true;
+        applySnapshot(payload.new.state);
+        try{localStorage.setItem(STORAGE_KEY,JSON.stringify(payload.new.state));}catch{}
+        showToast("Synced — data updated from another device","success");
+      }).subscribe();
+    })();
+    return()=>{if(channel)supabase.removeChannel(channel);};
+  },[]);// eslint-disable-line react-hooks/exhaustive-deps
+
+  // Auto-save: localStorage always, Supabase when available (debounced 1.5 s)
   const _saveTimer=useRef(null);
   useEffect(()=>{
+    if(_skipNextSync.current){_skipNextSync.current=false;return;}
     clearTimeout(_saveTimer.current);
-    _saveTimer.current=setTimeout(()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify({villas,bookings,maintenance,assets,schedule,housekeeping,waterPower,financials:financials.slice(0,365),staff,payroll,advances,leaves,leaveBalances,shifts,training,pettyCash,surveys,inventory,purchaseOrders,feedback,lostFound,restaurantOrders:restaurantOrders.slice(0,500),menu,specials,leads,packages,marketingTasks,socialPosts,emailCampaigns,guestCRM,socialInbox,gardenZones,gardenTasks,plants,events,laundry,poolChemistry,poolActivities,poolMaintenance,settings,activityLog}));}catch{}},1500);
+    _saveTimer.current=setTimeout(async()=>{
+      const snap=buildSnapshot();
+      try{localStorage.setItem(STORAGE_KEY,JSON.stringify(snap));}catch{}
+      if(supabase){
+        setSyncStatus("saving");
+        const{error}=await supabase.from("resort_state").upsert({resort_id:RESORT_ID,state:snap,updated_at:new Date().toISOString()});
+        setSyncStatus(error?"offline":"synced");
+      }
+    },1500);
   });
 
   useEffect(()=>{const s=document.createElement("style");s.textContent=`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap');*{margin:0;padding:0;box-sizing:border-box;font-family:'DM Sans',sans-serif;}body{background:#FAF6EE;overflow:hidden;}::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:#F4ECD8;}::-webkit-scrollbar-thumb{background:#C9B89A;border-radius:3px;}button,input,select,textarea{font-family:'DM Sans',sans-serif;}`;document.head.appendChild(s);return()=>document.head.removeChild(s);},[]);
@@ -4545,7 +4619,7 @@ export default function App(){
       {showDev&&devotion&&<DevotionPopup devotion={devotion} user={user} onClose={()=>setShowDev(false)}/>}
       <Sidebar view={view} setView={setView} role={user} onLogout={()=>{setUser(null);setView("dashboard");}} col={col} setCol={setCol} alerts={alerts}/>
       <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-        <TopBar user={user} alerts={alerts} setView={setView}/>
+        <TopBar user={user} alerts={alerts} setView={setView} syncStatus={syncStatus}/>
         <main style={{flex:1,overflowY:"auto",padding:24,background:"#FAF6EE"}}>
         {view==="dashboard"   &&<Dashboard villas={villas} bookings={bookings} financials={financials} maintenance={maintenance} staff={staff} restaurantOrders={restaurantOrders} gardenZones={gardenZones} poolChemistry={poolChemistry} laundry={laundry} events={events} leads={leads} setView={setView}/>}
         {view==="villas"      &&<VillasView villas={villas} setVillas={setVillas} role={user} showToast={showToast}/>}
